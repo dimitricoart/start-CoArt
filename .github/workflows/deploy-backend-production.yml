@@ -61,7 +61,8 @@ jobs:
             --port 8080 \
             --timeout 30 \
             --cpu 1 \
-            --memory 512Mi \
+            --memory 1Gi \
+            --cpu-boost \
             --min-instances 0 \
             --max-instances 10 \
             --update-env-vars "NODE_ENV=production" \
