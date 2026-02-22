@@ -23,6 +23,7 @@ gha-creds*.json
 **/credentials*.json
 **/service-account*.json
 **/serviceAccount*.json
+coart-marketplace*.json
 **/*.pem
 **/*-key.json
 **/*.key
