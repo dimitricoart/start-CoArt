@@ -25,6 +25,16 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Show deploy source
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "SHA: ${{ github.sha }}"
+          echo "Branch: ${{ github.ref_name }}"
+          git log -1 --oneline
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v3
@@ -47,7 +57,10 @@ jobs:
           npm i
           npm run build
 
-      - name: Install client dependencies
+      - name: Clean client build output
+        run: rm -rf services/client/dist
+
+      - name: Build client
         working-directory: services/client
         env:
           BE_URL: ${{ vars.BE_URL }}
@@ -94,6 +107,14 @@ jobs:
           EOF
           npm run build
 
+      - name: Verify bundle has no ethberry
+        run: |
+          if grep -r "ethberry" services/client/dist/*.js 2>/dev/null; then
+            echo "::error::Build still contains @ethberry. Remove all ethberry imports from src and re-run."
+            exit 1
+          fi
+          echo "Bundle check passed: no ethberry references."
+
       - name: Configure Artifact Registry authentication
         run: gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev --quiet
 
@@ -105,6 +126,7 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker build \
+            --no-cache \
             -f Dockerfile.frontend \
             -t "$IMAGE_URI" \
             .

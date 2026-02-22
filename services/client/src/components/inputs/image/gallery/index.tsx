@@ -65,7 +65,7 @@ export const GalleryInput: FC<IGalleryInputProps> = props => {
   const [isLoading, setIsLoading] = useState(false);
   const [instanceId] = useState(getInstanceId);
 
-  const { testId } = useTestId();
+  const testId: string | undefined = useTestId();
   const testIdProps = testId ? { "data-testid": `${testId}-FileInput` } : {};
 
   const suffix = name.split(".").pop()!;
