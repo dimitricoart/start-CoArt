@@ -3,6 +3,9 @@ import { createRoot } from "react-dom/client";
 
 export const render = (App: ComponentClass<any> | FunctionComponent<any>): void => {
   const container = document.getElementById("app");
-  const root = createRoot(container!);
+  if (!container) {
+    throw new Error("[render] #app root element not found.");
+  }
+  const root = createRoot(container);
   root.render(<App />);
 };

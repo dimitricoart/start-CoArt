@@ -5,11 +5,19 @@ import { NodeEnv } from "@framework/constants";
 import { render } from "./utils/render";
 import { App } from "./routes";
 
-init({
-  dsn: process.env.NODE_ENV === NodeEnv.development ? void 0 : process.env.SENTRY_DNS,
-  // Setting this option to true will send default PII data to Sentry.
-  // For example, automatic IP address collection on events
-  sendDefaultPii: true,
-});
+try {
+  init({
+    dsn: process.env.NODE_ENV === NodeEnv.development ? void 0 : process.env.SENTRY_DSN,
+    sendDefaultPii: true,
+  });
+} catch (e) {
+  if (process.env.NODE_ENV !== NodeEnv.production) {
+    console.warn("Sentry init failed", e);
+  }
+}
+
+if (typeof App === "undefined") {
+  throw new Error("[App] Router/App module failed to load. Check for missing or circular dependencies and that env (e.g. BE_URL) is set for production build.");
+}
 
 render(App);

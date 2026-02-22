@@ -59,8 +59,11 @@ async function bootstrap(): Promise<void> {
     app.enableShutdownHooks();
   }
 
-  const host = configService.get<string>("HOST", "localhost");
   const port = configService.get<string>("PORT", "3001");
+  const host =
+    nodeEnv === NodeEnv.production || nodeEnv === NodeEnv.staging
+      ? "0.0.0.0"
+      : configService.get<string>("HOST", "localhost");
 
   app.set("query parser", "extended");
   app.use(express.urlencoded({ extended: true }));
