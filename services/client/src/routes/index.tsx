@@ -1,16 +1,17 @@
-import { FC } from "react";
+import { FC, lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 
 import { ROUTES } from "./routes";
 import { Providers } from "../app";
 import { Layout } from "../components/layout";
-import { Test } from "../pages/test";
 import { TermsOfUse } from "../pages/legal/terms-of-use";
 import { CommunityStandards } from "../pages/legal/community-standards";
 import { Message } from "../pages/message";
 import { StoragePolicy } from "../pages/legal/storage-policy";
 import { publicRoutes } from "./public";
 import { protectedRoutes } from "./protected";
+
+const Test = lazy(() => import("../pages/test").then(m => ({ default: m.Test })));
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,11 @@ const router = createBrowserRouter([
       ...protectedRoutes,
       {
         path: "/test",
-        Component: Test,
+        element: (
+          <Suspense fallback={null}>
+            <Test />
+          </Suspense>
+        ),
       },
 
       {
