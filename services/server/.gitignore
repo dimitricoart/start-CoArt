@@ -1,0 +1,41 @@
+# Build and deps
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+temp/
+tmp/
+
+# Environment and secrets
+.env
+.env.*
+!.env.sample
+.env.local
+.env.development
+.env.production
+.env.staging
+.env.test
+
+# Credentials, keys, wallets
+*-creds*.json
+gha-creds*.json
+**/credentials*.json
+**/service-account*.json
+**/serviceAccount*.json
+**/*.pem
+**/*-key.json
+ardrive-wallet*.json
+firebase-adminsdk*.json
+*.base64
+
+# Logs and OS
+*.log
+.DS_Store
+.idea/
+.vscode/
+coverage/
+.nyc_output/
+
+# Local DB/data
+*.sqlite
+*.db

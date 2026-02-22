@@ -1,0 +1,63 @@
+# Dependencies and build
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+.next/
+out/
+.nuxt/
+
+# Environment and secrets (keep only .env.sample)
+.env
+.env.*
+!.env.sample
+.env.local
+.env.development
+.env.production
+.env.staging
+.env.test
+
+# Credentials, keys, wallets
+*-creds*.json
+gha-creds*.json
+**/credentials*.json
+**/service-account*.json
+**/serviceAccount*.json
+**/*.pem
+**/*-key.json
+**/*.key
+ardrive-wallet.json
+ardrive-wallet*.json
+*.base64
+firebase-adminsdk*.json
+google-services.json
+GoogleService-Info.plist
+
+# NPM (optional: uncomment if you store auth in .npmrc)
+# .npmrc
+
+# Logs and OS
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# IDE and misc
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Test and coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# Docker
+.docker/
+
+# Local data (if any)
+postgres/
+*.sqlite
+*.db

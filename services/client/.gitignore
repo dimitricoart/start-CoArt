@@ -1,0 +1,32 @@
+# Build and deps
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+
+# Environment and secrets
+.env
+.env.*
+!.env.sample
+.env.local
+.env.development
+.env.production
+.env.staging
+.env.test
+
+# Credentials and keys
+*-creds*.json
+**/credentials*.json
+**/service-account*.json
+**/*.pem
+**/*-key.json
+firebase-adminsdk*.json
+google-services.json
+GoogleService-Info.plist
+
+# Logs and OS
+*.log
+.DS_Store
+.idea/
+.vscode/
+coverage/

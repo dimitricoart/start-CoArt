@@ -1,0 +1,29 @@
+# Build and artifacts
+node_modules/
+dist/
+artifacts/
+cache/
+coverage/
+typechain-types/
+typechain-types.d.ts
+
+# Environment and secrets
+.env
+.env.*
+!.env.sample
+.env.local
+*-creds*.json
+**/*.pem
+**/*-key.json
+**/*wallet*.json
+*.keystore
+
+# Hardhat
+.openzeppelin/
+deployments/localhost/
+
+# Logs and OS
+*.log
+.DS_Store
+.idea/
+.vscode/

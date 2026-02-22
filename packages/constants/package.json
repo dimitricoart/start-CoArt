@@ -1,0 +1,40 @@
+{
+  "author": {
+    "email": "dimitri@fractown.com",
+    "name": "CoArt"
+  },
+  "dependencies": {},
+  "description": "constants for validation on FE and BE",
+  "devDependencies": {
+    "rimraf": "6.1.2",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "keywords": [],
+  "license": "UNLICENSED",
+  "main": "./dist/index.js",
+  "name": "@framework/constants",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coartmarket/marketplace/"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint . --fix",
+    "prebuild": "rimraf dist",
+    "prepublish": "npm run build",
+    "test": "exit 0"
+  },
+  "sideEffects": false,
+  "title": "CoArt - Portal",
+  "types": "./dist/index.d.ts",
+  "version": "0.0.1"
+}

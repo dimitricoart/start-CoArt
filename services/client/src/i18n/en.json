@@ -1,0 +1,648 @@
+{
+  "components": {
+    "backBtn": "Back",
+    "chip": {
+      "approved": "Approved",
+      "declined": "Declined",
+      "finalized": "Finalized",
+      "pending": "Pending",
+      "rejected": "Rejected",
+      "txawait": "Awaiting tx"
+    },
+    "dropzone": {
+      "file-invalid-type": "You can't upload {type} only {accept} are allowed",
+      "file-too-large": "File is {size}, maximum file size is {maxSize}",
+      "file-too-small": "File is {size}, minimum file size is {minSize}",
+      "too-many-files": "To many files"
+    },
+    "emptyList": "The list is empty",
+    "footer": {
+      "communityStandards": "Community Standards",
+      "responsibleStoragePolicy": "Responsible Storage Policy",
+      "termsOfUse": "Terms of Use"
+    },
+    "header": {
+      "language": {
+        "switch": "Switch Language"
+      },
+      "menu": {
+        "dashboard": "Dashboard",
+        "login": "Login",
+        "logout": "Logout",
+        "profile": "Profile",
+        "showroom": "Showroom"
+      },
+      "theme": {
+        "switch": "Switch theme"
+      },
+      "wallet": {
+        "connect": "Connect wallet",
+        "menu": "Account",
+        "notMatch": "Current wallet does not match with the profile wallet",
+        "notValid": "Invalid network. Please switch to correct network according to your profile",
+        "test": "Test"
+      }
+    },
+    "image": {
+      "size": "Size: {width}x{height}"
+    },
+    "tabs": {
+      "asset": {
+        "about": "About",
+        "download": "Download documents",
+        "shipping": "Shipping and returns",
+        "provenance": "Provenance"
+      },
+      "showroom": {
+        "about": "About",
+        "showcase": "Showcase"
+      },
+      "merchant": {
+        "showrooms": "Showrooms",
+        "about": "About",
+        "provenance": "Provenance"
+      }
+    }
+  },
+  "dialogs": {
+    "comingSoon": "Coming soon",
+    "confirmation": "Please confirm",
+    "create": "Create",
+    "delete": "Delete `{title}`?",
+    "edit": "Edit",
+    "view": "View"
+  },
+  "enums": {
+    "assetStatus": {
+      "APPROVED": "Approved",
+      "DECLINE": "Decline",
+      "FINALIZED": "Finalized",
+      "NEW": "New",
+      "REJECT": "Reject"
+    },
+    "assetType": {
+      "DIGITAL": "Digital",
+      "PHYSICAL": "Physical"
+    },
+    "category": {
+      "BOOKS": "Books",
+      "CLOCKS": "Clocks",
+      "COINS": "Coins",
+      "CRAFTS": "Crafts",
+      "DECORATIVE_OBJECTS": "Decorative Objects",
+      "DRAWINGS": "Drawings",
+      "FOLK_ART": "Folk Art",
+      "ICONS_AND_RELIGIOUS_OBJECTS": "Icons & Religious Objects",
+      "INSTRUMENTS": "Instruments",
+      "JEWELRY": "Jewelry",
+      "LUXURY_GOODS": "Luxury Goods",
+      "MANUSCRIPTS": "Manuscripts",
+      "MEDALS": "Medals",
+      "MIXED_MEDIA": "Mixed Media",
+      "OBJET_D_ART": "Objet d’Art",
+      "OTHER": "Other",
+      "PAINTINGS": "Paintings",
+      "PHOTOGRAPHY": "Photography",
+      "PRECIOUS_OBJECTS": "Precious Objects",
+      "PRINTS": "Prints",
+      "RARE_ITEMS_RWA_LUXURY_ASSET_CLASS": "Rare items (RWA luxury asset class)",
+      "SCULPTURE": "Sculpture",
+      "SPORTS_MEMORABILIA": "Sports Memorabilia",
+      "STAMPS": "Stamps",
+      "TOYS": "Toys",
+      "VINTAGE_OBJECTS": "Vintage Objects",
+      "WATCHES": "Watches"
+    },
+    "language": {
+      "EN": "English",
+      "RU": "Russian"
+    },
+    "material": {
+      "ACRYLIC_ON_CANVAS": "Acrylic on canvas",
+      "BRONZE": "Bronze",
+      "DIAMONDS": "Diamonds",
+      "DIGITAL_PRINT": "Digital print",
+      "ENAMEL": "Enamel",
+      "ENCAUSTIC": "Encaustic",
+      "ETCHING": "Etching",
+      "GLASS": "Glass",
+      "GOLD": "Gold",
+      "GOUACHE": "Gouache",
+      "LITHOGRAPH": "Lithograph",
+      "MARBLE": "Marble",
+      "MIXED_MEDIA": "Mixed media",
+      "OIL_ON_CANVAS": "Oil on canvas",
+      "OTHER": "Other",
+      "PLATINUM": "Platinum",
+      "PORCELAIN": "Porcelain",
+      "PRECIOUS_STONES": "Precious stones",
+      "RUBIES": "Rubies",
+      "SAPPHIRES": "Sapphires",
+      "SEMI_PRECIOUS_STONES": "Semi-precious stones",
+      "SILVER": "Silver",
+      "STAINLESS_STEEL": "Stainless steel",
+      "TEMPERA": "Tempera",
+      "WATERCOLOR": "Watercolor",
+      "WOOD": "Wood"
+    },
+    "merchantStatus": {
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive",
+      "PENDING": "Pending"
+    },
+    "orientation": {
+      "HORIZONTAL": "Horizontal",
+      "SQUARE": "Square",
+      "VERTICAL": "Vertical"
+    },
+    "style": {
+      "ABSTRACT": "Abstract",
+      "ART_DECO": "Art Deco",
+      "ART_NOUVEAU": "Art Nouveau",
+      "CONCEPTUAL": "Conceptual",
+      "CONTEMPORARY": "Contemporary",
+      "CONTEMPORARY_JEWELRY": "Contemporary Jewelry",
+      "EDWARDIAN": "Edwardian",
+      "EXPRESSIONISM": "Expressionism",
+      "FABERGE_STYLE_OBJECTS": "Fabergé Style Objects",
+      "FIGURATIVE": "Figurative",
+      "FINE_ART": "Fine Art",
+      "GEORGIAN": "Georgian",
+      "IMPERIAL_STYLE": "Imperial Style",
+      "IMPRESSIONISM": "Impressionism",
+      "LOUIS_XVI_EMPIRE": "Louis XVI / Empire",
+      "MID_CENTURY": "Mid-Century",
+      "MINIMALISM": "Minimalism",
+      "MODERN": "Modern",
+      "MODERNIST_JEWELRY": "Modernist Jewelry",
+      "ORIENTAL": "Oriental",
+      "OTHER": "Other",
+      "POP_ART": "Pop Art",
+      "PRIMITIVISM": "Primitivism",
+      "REALISM": "Realism",
+      "SURREALISM": "Surrealism",
+      "SYMBOLISM": "Symbolism",
+      "VICTORIAN": "Victorian",
+      "VICTORIAN_JEWELRY": "Victorian Jewelry"
+    },
+    "subject": {
+      "ABSTRACT": "Abstract",
+      "ANIMAL": "Animal",
+      "ARCHITECTURE": "Architecture",
+      "CITYSCAPE": "Cityscape",
+      "FANTASY": "Fantasy",
+      "FLORAL": "Floral",
+      "LANDSCAPE": "Landscape",
+      "MEN": "Men",
+      "MYTHOLOGY": "Mythology",
+      "NATURE": "Nature",
+      "NUDE": "Nude",
+      "OTHER": "Other",
+      "PEOPLE": "People",
+      "PORTRAIT": "Portrait",
+      "RELIGION": "Religion",
+      "STILL_LIFE": "Still life",
+      "WOMEN": "Women"
+    },
+    "units": {
+      "CM": "cm",
+      "INCH": "inch"
+    }
+  },
+  "form": {
+    "buttons": {
+      "accept": "Accept",
+      "activate": "Activate",
+      "add": "Add",
+      "approve": "Approve",
+      "cancel": "Cancel",
+      "checkBalance": "Check Balances",
+      "confirm": "Confirm",
+      "create": "Create",
+      "createOffer": "Create Offer",
+      "delete": "Delete",
+      "edit": "Edit",
+      "empty": "\uFEFF",
+      "forgot": "Forgot password?",
+      "gotIt": "Got it",
+      "hideFilters": "Hide filters",
+      "invite": "Invite",
+      "load": "Load",
+      "loaded": "Done",
+      "login": "Login",
+      "logout": "Logout",
+      "mainPage": "Main Page",
+      "mint": "Mint",
+      "mintToken": "Mint Tokens",
+      "ok": "Ok",
+      "pause": "Pause",
+      "reject": "Reject",
+      "reset": "Reset",
+      "resolve": "Resolve",
+      "save": "Save",
+      "saveNewPassword": "Save new password",
+      "search": "Search",
+      "sendMessage": "Send message",
+      "sendOnEmail": "Send on email",
+      "sendToExpertize": "Send to expertize",
+      "setAmount": "Set amount",
+      "showFilters": "Show filters",
+      "showMore": "Show more",
+      "signup": "Sign up",
+      "stakingInfo": "Staking info",
+      "start": "Start",
+      "startRound": "Start round",
+      "submit": "Submit",
+      "update": "Update",
+      "upload": "Upload"
+    },
+    "hints": {
+      "emailWarning": "Warning! This user won't be able to use this site until he confirms his new email address.",
+      "markdown": "This field supports <a href=\"https://guides.github.com/features/mastering-markdown/\" target=\"_blank\">GH Flavored Markdown</a>",
+      "maxValue": "Max {label}: {value}",
+      "prompt": "You have unsaved information, are you sure you want to leave this page?"
+    },
+    "labels": {
+      "active": "Active",
+      "amount": "Amount",
+      "artistName": "The name of the Author",
+      "artworkCreatedAt": "Year of creation",
+      "assetId": "Asset",
+      "assetStatus": "Status",
+      "assetType": "Type",
+      "author": "Author",
+      "backgroundImageUrl": "Background Image",
+      "blockchainAgree": "I agree to the creation of a multi-signature blockchain wallet for me",
+      "buyerName": "Buyer's name",
+      "caption": "Caption",
+      "category": "Category",
+      "comment": "Comment",
+      "confirm": "Confirm",
+      "confirmListing": "I agree to sign listing agreement",
+      "confirmPurchase": "I agree to sign purchase agreement",
+      "coverImageUrl": "Upload cover image",
+      "depth": "Depth",
+      "description": "Description",
+      "displayName": "Display name",
+      "documents": "Documents",
+      "email": "Email",
+      "files": "Files",
+      "fractions": "Fractions",
+      "galleryFiles": "Upload documents <info>(up to {value})</info>",
+      "galleryImages": "Upload Images <info>(up to {value}, min {minValue})</info>",
+      "height": "Height",
+      "imageUrl": "Image",
+      "isConfirmed": "I confirm that all information I provided is true and I accept full responsibility.",
+      "isCopyright": "I’m copyright owner of this asset",
+      "language": "Language",
+      "material": "Material",
+      "merchantStatus": "Status",
+      "message": "Message",
+      "name": "Name",
+      "orientation": "Orientation",
+      "password": "Password",
+      "photos": "Photos",
+      "photos-file": "Photos",
+      "price": "Price",
+      "sellerName": "Seller's name",
+      "showroomId": "Showroom",
+      "style": "Style",
+      "subject": "Subject",
+      "subtitle": "Subtitle",
+      "termsAgree": "I agree with the <a>Terms of Use</a>",
+      "title": "Title",
+      "units": "Units",
+      "width": "Width"
+    },
+    "pdf": {
+      "error": "Error loading document",
+      "loading": "Loading document...",
+      "loadingPage": "Loading page...",
+      "pageIndicator": "{current} / {total}",
+      "pdfjs": "Document not showing? Tap the link to read the <a>SAFT</a>, then complete the form.",
+      "pleaseWait": "Please wait",
+      "preparing": "Preparing document...",
+      "scrollToEnd": "Scroll to the end"
+    },
+    "placeholders": {
+      "artistName": "Artist name",
+      "artworkCreatedAt": "Year of creation",
+      "assetId": "Asset",
+      "assetName": "Name of the Asset...",
+      "caption": "Caption",
+      "comment": "Leave a comment indicating the reason for the reject",
+      "confirm": "******",
+      "depth": "0",
+      "description": "Description",
+      "displayName": "Gordon Freeman",
+      "email": "me@google.com",
+      "fractions": "10000",
+      "height": "0",
+      "message": "Hi there!",
+      "name": "Enter your name",
+      "password": "******",
+      "price": "0",
+      "query": "Search",
+      "showroomId": "Showroom",
+      "subtitle": "Subtitle",
+      "title": "Title",
+      "width": "0"
+    },
+    "tips": {
+      "add": "Add",
+      "cancel": "Cancel",
+      "create": "Create",
+      "delete": "Delete",
+      "edit": "Edit",
+      "fund": "Fund",
+      "releasable": "Check releasable amount",
+      "release": "Release",
+      "view": "View"
+    },
+    "validations": {
+      "badInput": "{label} is invalid",
+      "customError": "???",
+      "duplicate": "{label} already in use",
+      "invalidJSON": "Invalid JSON",
+      "maxItemLength": "Value must not be greater than the length of 'Item' assets",
+      "maxTwoDecimals": "{label} can have up to 2 decimal places",
+      "notSafeForWork": "{label} not safe for work",
+      "patternMismatch": "{label} does not match expected pattern",
+      "rangeOverflow": "{label} is too high",
+      "rangeUnderflow": "{label} is too low",
+      "tooLong": "{label} is too long",
+      "tooShort": "{label} is too short",
+      "typeMismatch": "{label} is invalid",
+      "unSupportedFile": "Unsupported file",
+      "valueMissing": "{label} is required",
+      "weak": "{label} is too weak",
+      "whitelistValidation": "Property should not exist"
+    }
+  },
+  "messages": {
+    "copy": "Copied",
+    "empty-list": "Nothing to display",
+    "forgot-password-successful": "We sent link for restore password on your email. If the email has not arrived, check the spam.",
+    "fractionalInterest": "Fraction resale is coming soon. We’ll notify you when it becomes available.",
+    "loading": "Loading...",
+    "page-not-found": "Page Not Found",
+    "registration-successful": "Registration was successful. Check your email. If the email has not arrived, check the spam.",
+    "titles": {
+      "forgot-password-successful": "Forgot password",
+      "page-not-found": "Page Not Found",
+      "registration-successful": "Registration successful"
+    },
+    "txawait": "This item cannot be edited while the transaction is pending confirmation.",
+    "uncaughtError": "Unexpected error"
+  },
+  "pages": {
+    "asset": {
+      "alert": {
+        "declined": "To validate the asset, additional information is required.",
+        "rejected": "The asset was not validated."
+      },
+      "rejectAsset": {
+        "message": "Reject asset"
+      },
+      "search": {
+        "title": "Search assets"
+      },
+      "validate": {
+        "title": "New assets"
+      },
+      "view": {
+        "buyNow": "Buy Now",
+        "by": "By",
+        "contactSeller": "Contact the Seller",
+        "createFcc": "Create FCC",
+        "createOffer": "Create offer",
+        "dialog": {
+          "title": "Propose price to owner"
+        },
+        "documents": {
+          "files": "Files",
+          "view": "View"
+        },
+        "edit": "Edit asset",
+        "propose": "Propose price",
+        "provenance": {
+          "asset": "Asset",
+          "buyer": "Buyer",
+          "createdAt": "Created at",
+          "fractions": "Fractions",
+          "price": "Price",
+          "seller": "Seller",
+          "title": "Provenance"
+        },
+        "setPrice": "Set price",
+        "title": "{title}"
+      }
+    },
+    "dashboard": {
+      "assets": {
+        "create": {
+          "dimensions": "Dimensions",
+          "specifications": "Specifications",
+          "status": "Asset status",
+          "title": "Create your <i>asset</i>"
+        },
+        "list": {
+          "title": "My assets"
+        },
+        "update": {
+          "title": "Update your <i>asset</i>"
+        },
+        "uploads": {
+          "title": "Uploaded Assets"
+        }
+      },
+      "favorites": {
+        "title": "Favorites"
+      },
+      "ledger": {
+        "list": {
+          "title": "Owned assets"
+        }
+      },
+      "menu": {
+        "merchant": "My merchant",
+        "assets": "My uploads",
+        "favorites": "My favorites",
+        "ledger": "My assets",
+        "merchants": "Merchants",
+        "settings": "Settings",
+        "showrooms": "My showrooms",
+        "validation": "Validation",
+        "wallet": "My wallet"
+      },
+      "merchants": {
+        "list": {
+          "title": "Merchants"
+        },
+        "update": {
+          "title": "Update your <i>merchant</i>"
+        }
+      },
+      "offer": {
+        "create": {
+          "title": "Create <i>offer</i>"
+        }
+      },
+      "settings": {
+        "coming": "Coming soon"
+      },
+      "showrooms": {
+        "create": {
+          "title": "Create <i>showroom</i>"
+        },
+        "list": {
+          "title": "My showrooms"
+        },
+        "update": {
+          "title": "Update your <i>Showroom</i>"
+        }
+      },
+      "wallet": {
+        "address": "Your blockchain account address: <address>{value}</address>",
+        "allData": "All data stored on the blockchain is transparent and verifiable.",
+        "balance": "Balance: {balance}",
+        "create": "Create",
+        "created": {
+          "0": "Your Blockchain Account Is Ready",
+          "1": "Dear User,",
+          "2": "At your request, we have created a secure multi-signature blockchain account for you on the Polygon network.",
+          "3": "This account is used to safely store and record information about all transactions related to your FCC (Fractional Crypto Certificate) assets.",
+          "4": "You can view and verify all crypto certificates that belong to you at any time by visiting your blockchain account at the public address below."
+        },
+        "description": {
+          "0": "To use CoArt Marketplace and manage FCC (Fractional Crypto Certificate) assets, a personal blockchain wallet is required.",
+          "1": "By clicking “Create Wallet”, you authorize us to create a secure multi-signature blockchain account for you on the Polygon network.",
+          "2": "This wallet will be used to:",
+          "2.list_0": "- record and verify transactions related to your FCC certificates;",
+          "2.list_1": "- store ownership data on the blockchain;",
+          "2.list_2": "- allow you to independently view your assets at any time.",
+          "3": "The wallet is created only after your consent and will have a public blockchain address available to you."
+        },
+        "title": "Wallet"
+      }
+    },
+    "fcc": {
+      "subtitle": "You must provide the seller's name so we can include it in the contract. You can also review the contract itself",
+      "title": "Create FCC"
+    },
+    "guest": {
+      "confirmation": "Please check your inbox to verify your email.",
+      "forgotPassword": "Forgot your password?",
+      "login": "Login",
+      "particleWallet": "Particle Wallet",
+      "registration": "Registration",
+      "restorePassword": "Restore password",
+      "signInWith": {
+        "facebook": "Sign in with Facebook",
+        "google": "Sign in with Google",
+        "metamask": "Sign in with Metamask",
+        "particle": "Sign in with Particle",
+        "walletConnect": "Sign in with Wallet Connect"
+      }
+    },
+    "landing": {
+      "carousel": {
+        "01": {
+          "description": "A rare <i>Fabergé Egg</i> is now offered through fractional ownership - opening access to a Blue Chip Art asset once reserved only for elite collectors.",
+          "title": "Become a co-owner of a Historic <br></br> <i>Fabergé Egg</i>"
+        }
+      },
+      "hero": {
+        "viewAsset": "View Asset",
+        "viewShowroom": "View Showroom"
+      },
+      "provenance": {
+        "all": "See all",
+        "empty": "The list is empty",
+        "top": "Recently <i>Sold</i>"
+      },
+      "merchants": {
+        "all": "See all",
+        "empty": "The list is empty",
+        "top": "TOP <i>Showrooms</i>"
+      },
+      "youtube": {
+        "video": "How <i>marketplace</i> works"
+      }
+    },
+    "paywall": {
+      "paykilla": "Paykilla",
+      "stripe": "Stripe",
+      "subtitle": "You must provide the buyer's name so we can include it in the contract. You can also review the contract itself.",
+      "title": "Enter the buyer's name and select the payment method"
+    },
+    "provenance": {
+      "recent": {
+        "title": "Recently <i>Sold</i>"
+      }
+    },
+    "showroom": {
+      "provenance": {
+        "provenance": {
+          "asset": "Asset",
+          "buyer": "Buyer",
+          "createdAt": "Created at",
+          "fractions": "Fractions",
+          "price": "Price",
+          "seller": "Seller",
+          "title": "Provenance"
+        },
+        "title": "Provenance"
+      },
+      "update": {
+        "submitBtn": "Update showroom",
+        "title": "Update your <i>Showroom</i>"
+      },
+      "view": {
+        "by": "by",
+        "empty": "The list is empty",
+        "provenance": "Provenance",
+        "title": "{title}"
+      }
+    },
+    "stripe": {
+      "success": {
+        "continue": "Continue",
+        "description": "Your payment has been processed successfully. To complete the transaction, you must sign a sales contract.",
+        "title": "Payment successful!"
+      }
+    }
+  },
+  "snackbar": {
+    "accountNotFound": "Account not found",
+    "active": "Successfully activated",
+    "categoryNotFound": "Category not found",
+    "created": "Successfully created",
+    "deleted": "Successfully deleted",
+    "deployed": "Successfully deployed",
+    "duplicateEmail": "User with this email already registered",
+    "email": "Email successfully sent.",
+    "emailIsNotVerified": "Email is not verified",
+    "entityNotFound": "Page not found",
+    "error": "Unknown Error",
+    "inactive": "Successfully inactivated",
+    "incorrectCredentials": "Incorrect login or password",
+    "insufficientPermissions": "Insufficient permissions",
+    "internalServerError": "Internal Server Error",
+    "insufficientBalance": "Insufficient balance",
+    "invite": "Successfully invited",
+    "onlyOneOfferAllowed": "Only one offer allowed",
+    "pageNotFound": "API error",
+    "passwordChanged": "Password was successfully changed. Now you can log in using your new password",
+    "paymentRequired": "Payment required",
+    "registered": "Registration successful, please verify your email to proceed",
+    "saved": "Successfully saved",
+    "success": "Success",
+    "tooManyRequests": "Too Many Requests",
+    "unauthorized": "Incorrect login or password",
+    "updated": "Successfully updated",
+    "userHasWrongRole": "Insufficient permissions",
+    "userIsNotActive": "User is not active",
+    "userNotFound": "User not found"
+  }
+}

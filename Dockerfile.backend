@@ -1,0 +1,34 @@
+# Check out https://hub.docker.com/_/node to select a new base image
+FROM node:24-alpine
+ARG NPM_AUTH_TOKEN
+
+# Set to a non-root built-in user `node`
+
+
+# Create app directory (with user `node`)
+RUN mkdir -p /home/node/dist/app
+
+WORKDIR /home/node/dist/app
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+
+COPY . .
+
+RUN npm i
+RUN npm run build
+
+# Bundle app source code
+
+
+WORKDIR /home/node/dist/app/services/server
+
+RUN npm run build
+
+# Bind to all network interfaces so that it can be mapped to the host OS
+
+EXPOSE ${PORT}
+RUN mkdir -p dist/app/services/server/temp && chown -R node:node /home/node
+USER node
+CMD [ "npm", "start" ]

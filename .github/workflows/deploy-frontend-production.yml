@@ -1,0 +1,123 @@
+name: Production Deploy Frontend
+
+on:
+  workflow_dispatch:
+
+env:
+  GCP_PROJECT_ID: custom-oasis-477218-v8
+  GCP_REGION: europe-west4
+  ARTIFACT_REPO: coartmarket-frontend
+  CLOUD_RUN_SERVICE: coartmarket-frontend
+
+jobs:
+  deploy-frontend:
+    environment: production
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24.12'
+
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Set up gcloud CLI
+        uses: google-github-actions/setup-gcloud@v3
+        with:
+          project_id: ${{ env.GCP_PROJECT_ID }}
+          export_default_credentials: true
+
+      - name: Install root dependencies
+        run: |
+          cat <<'EOF' > .npmrc
+          save-exact=true
+          package-lock=false
+          legacy-peer-deps=true
+          EOF
+          npm i
+          npm run build
+
+      - name: Install client dependencies
+        working-directory: services/client
+        env:
+          BE_URL: ${{ vars.BE_URL }}
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_AUTH_DOMAIN: ${{ vars.FIREBASE_AUTH_DOMAIN }}
+          FIREBASE_PROJECT_ID: ${{ vars.FIREBASE_PROJECT_ID }}
+          FIREBASE_STORAGE_BUCKET: ${{ vars.FIREBASE_STORAGE_BUCKET }}
+          FIREBASE_MESSAGE_SENDER_ID: ${{ vars.FIREBASE_MESSAGE_SENDER_ID }}
+          FIREBASE_APP_ID: ${{ vars.FIREBASE_APP_ID }}
+          FIREBASE_MEASUREMENT_ID: ${{ vars.FIREBASE_MEASUREMENT_ID }}
+          TYPESENSE_HOST: ${{ vars.TYPESENSE_HOST }}
+          TYPESENSE_PORT: ${{ vars.TYPESENSE_PORT }}
+          TYPESENSE_PROTOCOL: ${{ vars.TYPESENSE_PROTOCOL }}
+          TYPESENSE_API_KEY: ${{ secrets.TYPESENSE_API_KEY }}
+          GOOGLE_STORAGE_BUCKET_STATIC: ${{ vars.GOOGLE_STORAGE_BUCKET_STATIC }}
+          GOOGLE_STORAGE_BUCKET_ARTWORKS: ${{ vars.GOOGLE_STORAGE_BUCKET_ARTWORKS }}
+          GOOGLE_STORAGE_BUCKET_DOCUMENTS: ${{ vars.GOOGLE_STORAGE_BUCKET_DOCUMENTS }}
+          GOOGLE_STORAGE_BUCKET_AGREEMENTS: ${{ vars.GOOGLE_STORAGE_BUCKET_AGREEMENTS }}
+        run: |
+          cat <<EOF > .env.production
+          BE_URL=${BE_URL}
+          FIREBASE_API_KEY=${FIREBASE_API_KEY}
+          FIREBASE_AUTH_DOMAIN=${FIREBASE_AUTH_DOMAIN}
+          FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+          FIREBASE_STORAGE_BUCKET=${FIREBASE_STORAGE_BUCKET}
+          FIREBASE_MESSAGE_SENDER_ID=${FIREBASE_MESSAGE_SENDER_ID}
+          FIREBASE_APP_ID=${FIREBASE_APP_ID}
+          FIREBASE_MEASUREMENT_ID=${FIREBASE_MEASUREMENT_ID}
+          TYPESENSE_HOST=${TYPESENSE_HOST}
+          TYPESENSE_PORT=${TYPESENSE_PORT}
+          TYPESENSE_PROTOCOL=${TYPESENSE_PROTOCOL}
+          TYPESENSE_API_KEY=${TYPESENSE_API_KEY}
+          GOOGLE_STORAGE_BUCKET_STATIC=${GOOGLE_STORAGE_BUCKET_STATIC}
+          GOOGLE_STORAGE_BUCKET_ARTWORKS=${GOOGLE_STORAGE_BUCKET_ARTWORKS}
+          GOOGLE_STORAGE_BUCKET_DOCUMENTS=${GOOGLE_STORAGE_BUCKET_DOCUMENTS}
+          GOOGLE_STORAGE_BUCKET_AGREEMENTS=${GOOGLE_STORAGE_BUCKET_AGREEMENTS}
+          EOF
+          npm run build
+
+      - name: Configure Artifact Registry authentication
+        run: gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev --quiet
+
+      - name: Build metadata
+        run: |
+          echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+          echo "IMAGE_URI=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.ARTIFACT_REPO }}/frontend:${GITHUB_SHA}" >> $GITHUB_ENV
+
+      - name: Build and push Docker image
+        run: |
+          docker build \
+            -f Dockerfile.frontend \
+            -t "$IMAGE_URI" \
+            .
+          docker push "$IMAGE_URI"
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ env.CLOUD_RUN_SERVICE }} \
+            --image "$IMAGE_URI" \
+            --region ${{ env.GCP_REGION }} \
+            --platform managed \
+            --service-account coartmarket-frontend@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com \
+            --memory 512Mi \
+            --cpu 1 \
+            --concurrency 80 \
+            --timeout 30 \
+            --min-instances 1 \
+            --max-instances 10 \
+            --port 8080 \
+            --ingress internal-and-cloud-load-balancing \
+            --allow-unauthenticated \
+            --quiet

@@ -1,0 +1,626 @@
+{
+  "components": {
+    "backBtn": "Назад",
+    "chip": {
+      "approved": "Одобрено",
+      "declined": "Отклонено",
+      "finalized": "Завершено",
+      "pending": "В ожидании",
+      "rejected": "Отклонено",
+      "txawait": "Ожидание транзакции"
+    },
+    "dropzone": {
+      "file-invalid-type": "Вы не можете загрузить {type}, разрешены только {accept}",
+      "file-too-large": "Размер файла {size}, максимальный размер файла {maxSize}",
+      "file-too-small": "Размер файла {size}, минимальный размер файла {minSize}",
+      "too-many-files": "Слишком много файлов"
+    },
+    "emptyList": "Список пуст",
+    "footer": {
+      "communityStandards": "Стандарты сообщества",
+      "responsibleStoragePolicy": "Политика ответственного хранения",
+      "termsOfUse": "Условия использования"
+    },
+    "header": {
+      "language": {
+        "switch": "Сменить язык"
+      },
+      "menu": {
+        "dashboard": "Панель управления",
+        "login": "Войти",
+        "logout": "Выйти",
+        "profile": "Профиль",
+        "showroom": "Витрина"
+      },
+      "theme": {
+        "switch": "Сменить тему"
+      },
+      "wallet": {
+        "connect": "Подключить кошелёк",
+        "menu": "Аккаунт",
+        "notMatch": "Текущий кошелёк не совпадает с кошельком профиля",
+        "notValid": "Неверная сеть. Пожалуйста, переключитесь на правильную сеть согласно вашему профилю",
+        "test": "Тест"
+      }
+    },
+    "image": {
+      "size": "Размер: {width}x{height}"
+    },
+    "tabs": {
+      "asset": {
+        "description": "Описание",
+        "download": "Скачать документы",
+        "shipping": "Доставка и возврат"
+      },
+      "showroom": {
+        "about": "О нас",
+        "provenance": "Происхождение",
+        "showcase": "Витрина"
+      }
+    }
+  },
+  "dialogs": {
+    "confirmation": "Пожалуйста, подтвердите",
+    "create": "Создать",
+    "delete": "Удалить `{title}`?",
+    "edit": "Редактировать",
+    "view": "Просмотр"
+  },
+  "enums": {
+    "assetStatus": {
+      "APPROVED": "Одобрено",
+      "DECLINE": "Отклонить",
+      "FINALIZED": "Завершено",
+      "NEW": "Новый",
+      "REJECT": "Отклонить"
+    },
+    "assetType": {
+      "DIGITAL": "Цифровой",
+      "PHYSICAL": "Физический"
+    },
+    "category": {
+      "BOOKS": "Книги",
+      "CLOCKS": "Часы",
+      "COINS": "Монеты",
+      "CRAFTS": "Ремёсла",
+      "DECORATIVE_OBJECTS": "Декоративные объекты",
+      "DRAWINGS": "Рисунки",
+      "FOLK_ART": "Народное искусство",
+      "ICONS_AND_RELIGIOUS_OBJECTS": "Иконы и религиозные объекты",
+      "INSTRUMENTS": "Инструменты",
+      "JEWELRY": "Ювелирные изделия",
+      "LUXURY_GOODS": "Предметы роскоши",
+      "MANUSCRIPTS": "Рукописи",
+      "MEDALS": "Медали",
+      "MIXED_MEDIA": "Смешанная техника",
+      "OBJET_D_ART": "Предметы искусства",
+      "OTHER": "Другое",
+      "PAINTINGS": "Картины",
+      "PHOTOGRAPHY": "Фотография",
+      "PRECIOUS_OBJECTS": "Драгоценные предметы",
+      "PRINTS": "Эстампы",
+      "RARE_ITEMS_RWA_LUXURY_ASSET_CLASS": "Редкие предметы (класс роскошных активов RWA)",
+      "SCULPTURE": "Скульптура",
+      "SPORTS_MEMORABILIA": "Спортивная атрибутика",
+      "STAMPS": "Марки",
+      "TOYS": "Игрушки",
+      "VINTAGE_OBJECTS": "Винтажные предметы",
+      "WATCHES": "Наручные часы"
+    },
+    "language": {
+      "EN": "Английский",
+      "RU": "Русский"
+    },
+    "material": {
+      "ACRYLIC_ON_CANVAS": "Акрил на холсте",
+      "BRONZE": "Бронза",
+      "DIAMONDS": "Бриллианты",
+      "DIGITAL_PRINT": "Цифровая печать",
+      "ENAMEL": "Эмаль",
+      "ENCAUSTIC": "Энкаустика",
+      "ETCHING": "Гравюра",
+      "GLASS": "Стекло",
+      "GOLD": "Золото",
+      "GOUACHE": "Гуашь",
+      "LITHOGRAPH": "Литография",
+      "MARBLE": "Мрамор",
+      "MIXED_MEDIA": "Смешанная техника",
+      "OIL_ON_CANVAS": "Масло на холсте",
+      "OTHER": "Другое",
+      "PLATINUM": "Платина",
+      "PORCELAIN": "Фарфор",
+      "PRECIOUS_STONES": "Драгоценные камни",
+      "RUBIES": "Рубины",
+      "SAPPHIRES": "Сапфиры",
+      "SEMI_PRECIOUS_STONES": "Полудрагоценные камни",
+      "SILVER": "Серебро",
+      "STAINLESS_STEEL": "Нержавеющая сталь",
+      "TEMPERA": "Темпера",
+      "WATERCOLOR": "Акварель",
+      "WOOD": "Дерево"
+    },
+    "merchantStatus": {
+      "ACTIVE": "Активный",
+      "INACTIVE": "Не активный",
+      "PENDING": "В ожидании"
+    },
+    "orientation": {
+      "HORIZONTAL": "Горизонтальная",
+      "SQUARE": "Квадратная",
+      "VERTICAL": "Вертикальная"
+    },
+    "style": {
+      "ABSTRACT": "Абстракционизм",
+      "ART_DECO": "Ар-деко",
+      "ART_NOUVEAU": "Модерн",
+      "CONCEPTUAL": "Концептуализм",
+      "CONTEMPORARY": "Современное искусство",
+      "CONTEMPORARY_JEWELRY": "Современные ювелирные изделия",
+      "EDWARDIAN": "Эдвардианский стиль",
+      "EXPRESSIONISM": "Экспрессионизм",
+      "FABERGE_STYLE_OBJECTS": "Предметы в стиле Фаберже",
+      "FIGURATIVE": "Фигуративное искусство",
+      "FINE_ART": "Изобразительное искусство",
+      "GEORGIAN": "Георгианский стиль",
+      "IMPERIAL_STYLE": "Имперский стиль",
+      "IMPRESSIONISM": "Импрессионизм",
+      "LOUIS_XVI_EMPIRE": "Людовик XVI / Ампир",
+      "MID_CENTURY": "Середина века",
+      "MINIMALISM": "Минимализм",
+      "MODERN": "Модернизм",
+      "MODERNIST_JEWELRY": "Модернистские ювелирные изделия",
+      "ORIENTAL": "Восточный стиль",
+      "OTHER": "Другое",
+      "POP_ART": "Поп-арт",
+      "PRIMITIVISM": "Примитивизм",
+      "REALISM": "Реализм",
+      "SURREALISM": "Сюрреализм",
+      "SYMBOLISM": "Символизм",
+      "VICTORIAN": "Викторианский стиль",
+      "VICTORIAN_JEWELRY": "Викторианские ювелирные изделия"
+    },
+    "subject": {
+      "ABSTRACT": "Абстракция",
+      "ANIMAL": "Животные",
+      "ARCHITECTURE": "Архитектура",
+      "CITYSCAPE": "Городской пейзаж",
+      "FANTASY": "Фантазия",
+      "FLORAL": "Цветы",
+      "LANDSCAPE": "Пейзаж",
+      "MEN": "Мужчины",
+      "MYTHOLOGY": "Мифология",
+      "NATURE": "Природа",
+      "NUDE": "Обнажённая натура",
+      "OTHER": "Другое",
+      "PEOPLE": "Люди",
+      "PORTRAIT": "Портрет",
+      "RELIGION": "Религия",
+      "STILL_LIFE": "Натюрморт",
+      "WOMEN": "Женщины"
+    },
+    "units": {
+      "CM": "см",
+      "INCH": "дюйм"
+    }
+  },
+  "form": {
+    "buttons": {
+      "accept": "Принять",
+      "activate": "Активировать",
+      "add": "Добавить",
+      "approve": "Одобрить",
+      "cancel": "Отмена",
+      "checkBalance": "Проверить баланс",
+      "confirm": "Подтвердить",
+      "create": "Создать",
+      "delete": "Удалить",
+      "edit": "Редактировать",
+      "empty": "\uFEFF",
+      "forgot": "Забыли пароль?",
+      "hideFilters": "Скрыть фильтры",
+      "invite": "Пригласить",
+      "load": "Загрузить",
+      "loaded": "Готово",
+      "login": "Войти",
+      "logout": "Выйти",
+      "mainPage": "Главная страница",
+      "mint": "Создать",
+      "mintToken": "Создать токены",
+      "ok": "Ок",
+      "pause": "Пауза",
+      "reject": "Отклонить",
+      "reset": "Сбросить",
+      "resolve": "Решить",
+      "save": "Сохранить",
+      "saveNewPassword": "Сохранить новый пароль",
+      "search": "Поиск",
+      "sendMessage": "Отправить сообщение",
+      "sendOnEmail": "Отправить на email",
+      "sendToExpertize": "Отправить на экспертизу",
+      "setAmount": "Установить сумму",
+      "showFilters": "Показать фильтры",
+      "showMore": "Показать больше",
+      "signup": "Зарегистрироваться",
+      "stakingInfo": "Информация о стейкинге",
+      "start": "Начать",
+      "startRound": "Начать раунд",
+      "submit": "Отправить",
+      "update": "Обновить",
+      "upload": "Загрузить"
+    },
+    "hints": {
+      "emailWarning": "Внимание! Этот пользователь не сможет использовать этот сайт, пока не подтвердит свой новый адрес электронной почты.",
+      "markdown": "Это поле поддерживает <a href=\"https://guides.github.com/features/mastering-markdown/\" target=\"_blank\">GH Flavored Markdown</a>",
+      "maxValue": "Макс. {label}: {value}",
+      "prompt": "У вас есть несохранённая информация, вы уверены, что хотите покинуть эту страницу?"
+    },
+    "labels": {
+      "assetId": "Актив",
+      "fractions": "Фракции",
+      "active": "Активный",
+      "amount": "Сумма",
+      "artistName": "Имя автора",
+      "artworkCreatedAt": "Год создания",
+      "assetStatus": "Статус",
+      "assetType": "Тип",
+      "author": "Автор",
+      "backgroundImageUrl": "Фоновое изображение",
+      "blockchainAgree": "Я согласен на создание мультиподписного блокчейн-кошелька для меня",
+      "buyerName": "Имя покупателя",
+      "caption": "Подпись",
+      "category": "Категория",
+      "comment": "Комментарий",
+      "confirm": "Подтвердить",
+      "confirmListing": "Я согласен подписать договор листинга",
+      "confirmPurchase": "Я согласен подписать договор купли-продажи",
+      "coverImageUrl": "Загрузить обложку",
+      "depth": "Глубина",
+      "description": "Описание",
+      "displayName": "Отображаемое имя",
+      "documents": "Документы",
+      "email": "Email",
+      "files": "Файлы",
+      "galleryFiles": "Загрузить документы <info>(до {value})</info>",
+      "galleryImages": "Загрузить изображения <info>(до {value}, мин. {minValue})</info>",
+      "height": "Высота",
+      "imageUrl": "Изображение",
+      "isConfirmed": "Я подтверждаю, что вся предоставленная мной информация является правдой, и я принимаю на себя полную ответственность.",
+      "isCopyright": "Я владелец авторских прав на этот актив",
+      "language": "Язык",
+      "material": "Материал",
+      "merchantStatus": "Статус",
+      "message": "Сообщение",
+      "name": "Имя",
+      "orientation": "Ориентация",
+      "password": "Пароль",
+      "photos": "Фотографии",
+      "photos-file": "Фотографии",
+      "price": "Цена",
+      "sellerName": "Имя продавца",
+      "showroomId": "Витрина",
+      "style": "Стиль",
+      "subject": "Предмет",
+      "subtitle": "Подзаголовок",
+      "termsAgree": "Я согласен с <a>Условиями использования</a>",
+      "title": "Название",
+      "units": "Единицы",
+      "width": "Ширина"
+    },
+    "pdf": {
+      "error": "Ошибка загрузки документа",
+      "loading": "Загрузка документа...",
+      "loadingPage": "Загрузка страницы...",
+      "pageIndicator": "{current} / {total}",
+      "pdfjs": "Документ не отображается? Нажмите на ссылку, чтобы прочитать <a>SAFT</a>, затем заполните форму.",
+      "pleaseWait": "Пожалуйста, подождите",
+      "preparing": "Подготовка документа...",
+      "scrollToEnd": "Прокрутите до конца"
+    },
+    "placeholders": {
+      "fractions": "10000",
+      "assetId": "Актив",
+      "artistName": "Имя художника",
+      "artworkCreatedAt": "Год создания",
+      "assetName": "Название актива...",
+      "caption": "Подпись",
+      "comment": "Оставьте комментарий с указанием причины отклонения",
+      "confirm": "******",
+      "depth": "0",
+      "description": "Описание",
+      "displayName": "Гордон Фримен",
+      "email": "me@google.com",
+      "height": "0",
+      "message": "Привет!",
+      "name": "Введите ваше имя",
+      "password": "******",
+      "price": "0",
+      "query": "Поиск",
+      "showroomId": "Витрина",
+      "subtitle": "Подзаголовок",
+      "title": "Название",
+      "width": "0"
+    },
+    "tips": {
+      "add": "Добавить",
+      "cancel": "Отмена",
+      "create": "Создать",
+      "delete": "Удалить",
+      "edit": "Редактировать",
+      "fund": "Пополнить",
+      "releasable": "Проверить доступную сумму",
+      "release": "Освободить",
+      "view": "Просмотр"
+    },
+    "validations": {
+      "badInput": "{label} недействителен",
+      "customError": "???",
+      "duplicate": "{label} уже используется",
+      "invalidJSON": "Недействительный JSON",
+      "maxItemLength": "Значение не должно превышать длину активов 'Item'",
+      "maxTwoDecimals": "{label} может содержать до 2 знаков после запятой",
+      "notSafeForWork": "{label} содержит неприемлемый контент",
+      "patternMismatch": "{label} не соответствует ожидаемому шаблону",
+      "rangeOverflow": "{label} слишком большой",
+      "rangeUnderflow": "{label} слишком маленький",
+      "tooLong": "{label} слишком длинный",
+      "tooShort": "{label} слишком короткий",
+      "typeMismatch": "{label} недействителен",
+      "unSupportedFile": "Неподдерживаемый файл",
+      "valueMissing": "{label} обязателен",
+      "weak": "{label} слишком слабый",
+      "whitelistValidation": "Свойство не должно существовать"
+    }
+  },
+  "messages": {
+    "copy": "Скопировано",
+    "empty-list": "Нечего отображать",
+    "forgot-password-successful": "Мы отправили ссылку для восстановления пароля на ваш email. Если письмо не пришло, проверьте папку спам.",
+    "loading": "Загрузка...",
+    "page-not-found": "Страница не найдена",
+    "registration-successful": "Регистрация прошла успешно. Проверьте свою электронную почту. Если письмо не пришло, проверьте папку спам.",
+    "titles": {
+      "forgot-password-successful": "Забыли пароль",
+      "page-not-found": "Страница не найдена",
+      "registration-successful": "Регистрация успешна"
+    },
+    "txawait": "Этот элемент нельзя редактировать, пока транзакция ожидает подтверждения.",
+    "uncaughtError": "Непредвиденная ошибка"
+  },
+  "pages": {
+    "asset": {
+      "alert": {
+        "declined": "Для проверки актива требуется дополнительная информация.",
+        "rejected": "Актив не прошёл проверку."
+      },
+      "create": {
+        "dimensions": "Размеры",
+        "status": "Статус актива",
+        "title": "Создайте свой <i>актив</i>"
+      },
+      "list": {
+        "title": "Мои активы"
+      },
+      "price": {
+        "title": "Обновите <i>цену</i> вашего актива"
+      },
+      "rejectAsset": {
+        "message": "Отклонить актив"
+      },
+      "search": {
+        "title": "Поиск активов"
+      },
+      "update": {
+        "title": "Обновите свой <i>актив</i>"
+      },
+      "uploads": {
+        "title": "Загруженные активы"
+      },
+      "validate": {
+        "title": "Новые активы"
+      },
+      "view": {
+        "buyNow": "Купить сейчас",
+        "by": "От",
+        "contactSeller": "Связаться с продавцом",
+        "createOffer": "Выставить на продажу",
+        "createFcc": "Создать FCC",
+        "dialog": {
+          "title": "Предложить цену владельцу"
+        },
+        "documents": {
+          "files": "Файлы",
+          "view": "Просмотр"
+        },
+        "edit": "Редактировать актив",
+        "editPrice": "Редактировать цену актива",
+        "price": "Цена {value}",
+        "propose": "Предложить цену",
+        "provenance": {
+          "asset": "Актив",
+          "buyer": "Покупатель",
+          "createdAt": "Создано",
+          "fractions": "Доли",
+          "price": "Цена",
+          "seller": "Продавец",
+          "title": "Происхождение"
+        },
+        "setPrice": "Установить цену",
+        "title": "{title}"
+      }
+    },
+    "dashboard": {
+      "favorites": {
+        "title": "Избранное"
+      },
+      "menu": {
+        "assets": "Мои активы",
+        "favorites": "Moи избранные",
+        "merchants": "Торговцы",
+        "settings": "Настройки",
+        "showrooms": "Мои витрины",
+        "uploads": "Мои загрузки",
+        "validation": "Проверка",
+        "wallet": "Мой кошелёк"
+      },
+      "merchants": {
+        "title": "Торговци"
+      },
+      "settings": {
+        "coming": "Скоро"
+      },
+      "showrooms": {
+        "title": "Мои витрины"
+      },
+      "wallet": {
+        "address": "Адрес вашего блокчейн-аккаунта: <address>{value}</address>",
+        "allData": "Все данные, хранящиеся в блокчейне, прозрачны и проверяемы.",
+        "balance": "Баланс: {balance}",
+        "create": "Создать",
+        "created": {
+          "0": "Ваш блокчейн-аккаунт готов",
+          "1": "Уважаемый пользователь,",
+          "2": "По вашему запросу мы создали для вас защищённый блокчейн-аккаунт с мультиподписью в сети Polygon.",
+          "3": "Этот аккаунт используется для безопасного хранения и записи информации обо всех транзакциях, связанных с вашими активами FCC (Fractional Crypto Certificate).",
+          "4": "Вы можете в любое время просматривать и проверять все крипто-сертификаты, которые вам принадлежат, посетив свой блокчейн-аккаунт по публичному адресу ниже."
+        },
+        "description": {
+          "0": "Для использования CoArt Marketplace и управления активами FCC (Fractional Crypto Certificate) требуется персональный блокчейн-кошелёк.",
+          "1": "Нажимая «Создать кошелёк», вы разрешаете нам создать для вас защищённый блокчейн-аккаунт с мультиподписью в сети Polygon.",
+          "2": "Этот кошелёк будет использоваться для:",
+          "2.list_0": "- записи и проверки транзакций, связанных с вашими FCC-сертификатами;",
+          "2.list_1": "- хранения данных о владении в блокчейне;",
+          "2.list_2": "- предоставления вам возможности самостоятельно просматривать свои активы в любое время.",
+          "3": "Кошелёк создаётся только после вашего согласия и будет иметь публичный блокчейн-адрес, доступный вам."
+        },
+        "title": "Кошелёк"
+      }
+    },
+    "fcc": {
+      "subtitle": "Вы должны указать имя продавца, чтобы мы могли включить его в договор. Вы также можете просмотреть сам договор",
+      "title": "Создать FCC"
+    },
+    "guest": {
+      "confirmation": "Пожалуйста, проверьте свою почту для подтверждения email.",
+      "forgotPassword": "Забыли пароль?",
+      "login": "Войти",
+      "particleWallet": "Particle Wallet",
+      "registration": "Регистрация",
+      "restorePassword": "Восстановить пароль",
+      "signInWith": {
+        "facebook": "Войти через Facebook",
+        "google": "Войти через Google",
+        "metamask": "Войти через Metamask",
+        "particle": "Войти через Particle",
+        "walletConnect": "Войти через Wallet Connect"
+      }
+    },
+    "landing": {
+      "carousel": {
+        "01": {
+          "description": "Редкое <i>яйцо Фаберже</i> теперь предлагается через долевое владение – открывая доступ к активу голубых фишек, который ранее был доступен только элитным коллекционерам.",
+          "title": "Станьте совладельцем исторического <br></br> <i>яйца Фаберже</i>"
+        }
+      },
+      "hero": {
+        "viewAsset": "Просмотреть актив",
+        "viewShowroom": "Просмотреть выставочный зал"
+      },
+      "provenance": {
+        "all": "Посмотреть все",
+        "empty": "Список пуст",
+        "top": "Недавно <i>проданные</i>"
+      },
+      "showrooms": {
+        "all": "Посмотреть все",
+        "empty": "Список пуст",
+        "top": "ТОП <i>выставочных залов</i>"
+      },
+      "youtube": {
+        "video": "Как работает <i>маркетплейс</i>"
+      }
+    },
+    "merchant": {
+      "list": {
+        "title": "Торговцы"
+      },
+      "update": {
+        "title": "Update your <i>merchant</i>"
+      }
+    },
+    "paywall": {
+      "paykilla": "Paykilla",
+      "stripe": "Stripe",
+      "subtitle": "Вы должны указать имя покупателя, чтобы мы могли включить его в договор. Вы также можете просмотреть сам договор.",
+      "title": "Введите имя покупателя и выберите способ оплаты"
+    },
+    "provenance": {
+      "recent": {
+        "title": "Недавно <i>проданные</i>"
+      }
+    },
+    "showroom": {
+      "create": {
+        "title": "Создать выставочный зал"
+      },
+      "provenance": {
+        "provenance": {
+          "asset": "Актив",
+          "buyer": "Покупатель",
+          "createdAt": "Создано",
+          "fractions": "Доли",
+          "price": "Цена",
+          "seller": "Продавец",
+          "title": "Происхождение"
+        },
+        "title": "Происхождение"
+      },
+      "update": {
+        "submitBtn": "Обновить выставочный зал",
+        "title": "Обновите свой <i>выставочный зал</i>"
+      },
+      "view": {
+        "by": "от",
+        "empty": "Список пуст",
+        "provenance": "Происхождение",
+        "title": "{title}"
+      }
+    },
+    "stripe": {
+      "success": {
+        "continue": "Продолжить",
+        "description": "Ваш платёж успешно обработан. Для завершения транзакции вы должны подписать договор купли-продажи.",
+        "title": "Оплата прошла успешно!"
+      }
+    }
+  },
+  "snackbar": {
+    "accountNotFound": "Аккаунт не найден",
+    "active": "Успешно активировано",
+    "categoryNotFound": "Категория не найдена",
+    "created": "Успешно создано",
+    "deleted": "Успешно удалено",
+    "deployed": "Успешно развёрнуто",
+    "duplicateEmail": "Пользователь с таким email уже зарегистрирован",
+    "email": "Email успешно отправлен.",
+    "emailIsNotVerified": "Email не подтверждён",
+    "entityNotFound": "Страница не найдена",
+    "error": "Неизвестная ошибка",
+    "inactive": "Успешно деактивировано",
+    "incorrectCredentials": "Неверный логин или пароль",
+    "insufficientPermissions": "Недостаточно прав",
+    "internalServerError": "Внутренняя ошибка сервера",
+    "invite": "Успешно приглашён",
+    "pageNotFound": "Ошибка API",
+    "passwordChanged": "Пароль успешно изменён. Теперь вы можете войти, используя новый пароль",
+    "paymentRequired": "Требуется оплата",
+    "registered": "Регистрация успешна, пожалуйста, подтвердите свой email для продолжения",
+    "saved": "Успешно сохранено",
+    "success": "Успешно",
+    "tooManyRequests": "Слишком много запросов",
+    "unauthorized": "Неверный логин или пароль",
+    "updated": "Успешно обновлено",
+    "userHasWrongRole": "Недостаточно прав",
+    "userIsNotActive": "Пользователь не активен",
+    "userNotFound": "Пользователь не найден"
+  }
+}
