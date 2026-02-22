@@ -68,7 +68,11 @@ jobs:
           GOOGLE_STORAGE_BUCKET_DOCUMENTS: ${{ vars.GOOGLE_STORAGE_BUCKET_DOCUMENTS }}
           GOOGLE_STORAGE_BUCKET_AGREEMENTS: ${{ vars.GOOGLE_STORAGE_BUCKET_AGREEMENTS }}
         run: |
-          if [ -z "$${BE_URL}" ]; then echo "BE_URL is not set; production build may break at runtime."; fi
+          if [ -z "$${BE_URL}" ]; then
+            echo "::error::BE_URL is not set in GitHub Environment (production). Set it in Settings → Environments → production → Variables, then re-run."
+            exit 1
+          fi
+          export NODE_ENV=production
           cat <<EOF > .env.production
           BE_URL=$${BE_URL}
           SENTRY_DSN=$${SENTRY_DSN}
