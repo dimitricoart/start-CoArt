@@ -26,9 +26,8 @@ WORKDIR /home/node/dist/app/services/server
 
 RUN npm run build
 
-# Bind to all network interfaces so that it can be mapped to the host OS
-
-EXPOSE ${PORT}
+# Cloud Run sets PORT=8080 at runtime; app listens on 0.0.0.0:PORT (see main.ts)
+EXPOSE 8080
 RUN mkdir -p dist/app/services/server/temp && chown -R node:node /home/node
 USER node
 CMD [ "npm", "start" ]
