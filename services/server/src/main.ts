@@ -18,6 +18,8 @@ import { patchBigInt } from "./utils";
 patchBigInt();
 
 async function bootstrap(): Promise<void> {
+  console.info("[bootstrap] Starting Nest application…");
+
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     rawBody: true,
   });
@@ -59,7 +61,9 @@ async function bootstrap(): Promise<void> {
     app.enableShutdownHooks();
   }
 
-  const port = configService.get<string>("PORT", "3001");
+  // Cloud Run sets PORT=8080 at runtime; prefer process.env so we never miss it
+  const port =
+    process.env.PORT ?? configService.get<string>("PORT", "3001");
   const host =
     nodeEnv === NodeEnv.production || nodeEnv === NodeEnv.staging
       ? "0.0.0.0"
@@ -69,8 +73,11 @@ async function bootstrap(): Promise<void> {
   app.use(express.urlencoded({ extended: true }));
 
   await app.listen(Number(port), host, () => {
-    console.info(`API server is running on http://${host}:${port}`);
+    console.info(`[bootstrap] API server is running on http://${host}:${port}`);
   });
 }
 
-void bootstrap();
+bootstrap().catch((err) => {
+  console.error("[bootstrap] Fatal error:", err);
+  process.exit(1);
+});
