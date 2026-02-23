@@ -26,6 +26,10 @@ export class OfferService {
     private readonly ledgerService: LedgerService,
   ) {}
 
+  private toBigInt(value: string | number | bigint): bigint {
+    return typeof value === "bigint" ? value : BigInt(value);
+  }
+
   public search(dto: IPaginationDto, userEntity: UserEntity): Promise<[Array<OfferEntity>, number]> {
     const { skip, take } = dto;
 
@@ -45,7 +49,8 @@ export class OfferService {
   }
 
   public async create(dto: IOfferCreateDto, userEntity: UserEntity): Promise<OfferEntity> {
-    const { assetId, fractions, price } = dto;
+    const { assetId, price } = dto;
+    const fractions = this.toBigInt(dto.fractions);
 
     const assetEntity = await this.assetService.findOneAndCheckExistence({ id: assetId });
 
