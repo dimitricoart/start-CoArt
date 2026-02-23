@@ -16,12 +16,13 @@ function parsePostgresUrl(url: string): {
   dbName: string;
 } {
   const u = new URL(url);
+  const host = decodeURIComponent(u.hostname || "");
   return {
-    host: u.hostname,
+    host: host || "localhost",
     port: u.port ? parseInt(u.port, 10) : 5432,
     user: decodeURIComponent(u.username),
     password: decodeURIComponent(u.password),
-    dbName: u.pathname.replace(/^\//, "") || "coart-development",
+    dbName: u.pathname.replace(/^\//, "").split("/").filter(Boolean).pop() || "coart-development",
   };
 }
 

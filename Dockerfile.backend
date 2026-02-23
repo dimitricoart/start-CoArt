@@ -1,39 +1,19 @@
-# Check out https://hub.docker.com/_/node to select a new base image
-# Use Debian slim (glibc) instead of Alpine to avoid SIGABRT from native modules (Sentry, pg, etc.) on musl
-FROM node:24-slim
-ARG NPM_AUTH_TOKEN
+FROM node:24-alpine
 
-# Set to a non-root built-in user `node`
-
-
-# Create app directory (with user `node`)
 RUN mkdir -p /home/node/dist/app
 
 WORKDIR /home/node/dist/app
-
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
 
 COPY . .
 
 RUN npm i
 RUN npm run build
 
-# Bundle app source code
-
-
 WORKDIR /home/node/dist/app/services/server
 
 RUN npm run build
 
-# Cloud Run injects PORT at runtime; default for local runs
-ENV NODE_ENV=production
-ENV PORT=8080
-
-EXPOSE 8080
+EXPOSE ${PORT}
 RUN mkdir -p dist/app/services/server/temp && chown -R node:node /home/node
-# So container logs appear before Node starts (helps debug "probe failed" when process crashes early)
-RUN chmod +x /home/node/dist/app/services/server/scripts/run-server.sh
 USER node
-CMD [ "sh", "scripts/run-server.sh" ]
+CMD [ "npm", "start" ]

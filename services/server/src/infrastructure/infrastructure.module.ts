@@ -15,12 +15,15 @@ import config from "./database/database.config";
 
 function parsePostgresUrl(url: string): { host: string; port: number; user: string; password: string; dbName: string } {
   const u = new URL(url);
+  // Cloud SQL socket URLs use path as host, e.g. postgresql://user:pass@/cloudsql/PROJECT:REGION:INSTANCE/db
+  // URL parser gives hostname like "%2Fcloudsql%2F..." — decode so pg uses it as socket path
+  const host = decodeURIComponent(u.hostname || "");
   return {
-    host: u.hostname,
+    host: host || "localhost",
     port: u.port ? parseInt(u.port, 10) : 5432,
     user: decodeURIComponent(u.username),
     password: decodeURIComponent(u.password),
-    dbName: u.pathname.replace(/^\//, "") || "coart-development",
+    dbName: u.pathname.replace(/^\//, "").split("/").filter(Boolean).pop() || "coart-development",
   };
 }
 

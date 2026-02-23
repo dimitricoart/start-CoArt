@@ -48,6 +48,7 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker build \
+            --no-cache \
             -f Dockerfile.backend \
             -t "$IMAGE_URI" .
           docker push "$IMAGE_URI"
@@ -58,5 +59,8 @@ jobs:
             --image "$IMAGE_URI" \
             --region ${{ env.GCP_REGION }} \
             --platform managed \
+            --port 8080 \
+            --add-cloudsql-instances ${{ env.GCP_PROJECT_ID }}:${{ env.GCP_REGION }}:coartmarket-db \
+            --update-env-vars "NODE_ENV=production" \
             --allow-unauthenticated \
             --quiet

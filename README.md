@@ -6,12 +6,6 @@ Welcome to CoArt monorepo.
 
 All commands are given for mac, please figure windows equivalents yourself
 
-1. Clone repo from git
-
-```shell script
-git clone git@github.com:coartmarket/marketplace.git
-```
-
 2. Install [NVM](https://github.com/nvm-sh/nvm)
 
 ```shell script
