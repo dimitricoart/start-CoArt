@@ -54,6 +54,22 @@ jobs:
             -t "$IMAGE_URI" .
           docker push "$IMAGE_URI"
 
+      - name: Build secrets list for Cloud Run
+        id: secrets
+        run: |
+          # Все секреты с меткой app=coartmarket подставляются как env с тем же именем (версия :latest)
+          NAMES=$(gcloud secrets list \
+            --project="${{ env.GCP_PROJECT_ID }}" \
+            --filter="labels.app=coartmarket" \
+            --format="value(name)" \
+            | sed 's|.*/||')
+          if [ -z "$NAMES" ]; then
+            echo "No secrets with label app=coartmarket, using POSTGRES_URL only"
+            NAMES="POSTGRES_URL"
+          fi
+          SECRETS_ARG=$(echo "$NAMES" | while read -r n; do [ -n "$n" ] && echo -n "${n}=${n}:latest,"; done | sed 's/,$//')
+          echo "SECRETS_ARG=$SECRETS_ARG" >> $GITHUB_OUTPUT
+
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ env.CLOUD_RUN_SERVICE }} \
@@ -68,7 +84,7 @@ jobs:
             --min-instances 0 \
             --max-instances 10 \
             --update-env-vars "NODE_ENV=production" \
-            --set-secrets "POSTGRES_URL=POSTGRES_URL:latest" \
+            --set-secrets "${{ steps.secrets.outputs.SECRETS_ARG }}" \
             --allow-unauthenticated \
             --quiet
-          echo "If the container fails to start, add more secrets via --set-secrets or set env in Cloud Run console and check logs."
+          echo "If the container fails to start, check Cloud Run console env/secrets and logs."
