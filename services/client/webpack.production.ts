@@ -88,6 +88,9 @@ const config: Configuration = {
     minimize: true,
     splitChunks: {
       cacheGroups: {
+        // Only split @mui; keep @emotion in main to avoid "reading 'call'" in production
+        default: false,
+        defaultVendors: false,
         mui: {
           test: /[\\/]node_modules[\\/]@mui[\\/]/,
           name: "mui",
