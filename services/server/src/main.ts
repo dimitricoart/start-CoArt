@@ -63,7 +63,7 @@ async function bootstrap(): Promise<void> {
 
   // Cloud Run sets PORT=8080 at runtime; prefer process.env so we never miss it
   const port =
-    process.env.PORT ?? configService.get<string>("PORT", "3001");
+    Number(process.env.PORT) || Number(configService.get<string>("PORT")) || 8080;
   const host =
     nodeEnv === NodeEnv.production || nodeEnv === NodeEnv.staging
       ? "0.0.0.0"
@@ -72,7 +72,8 @@ async function bootstrap(): Promise<void> {
   app.set("query parser", "extended");
   app.use(express.urlencoded({ extended: true }));
 
-  await app.listen(Number(port), host, () => {
+  console.info(`[bootstrap] Binding to http://${host}:${port} (PORT env=${process.env.PORT ?? "not set"})`);
+  await app.listen(port, host, () => {
     console.info(`[bootstrap] API server is running on http://${host}:${port}`);
   });
 }

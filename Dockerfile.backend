@@ -26,7 +26,10 @@ WORKDIR /home/node/dist/app/services/server
 
 RUN npm run build
 
-# Cloud Run sets PORT=8080 at runtime; app listens on 0.0.0.0:PORT (see main.ts)
+# Cloud Run injects PORT at runtime; default for local runs
+ENV NODE_ENV=production
+ENV PORT=8080
+
 EXPOSE 8080
 RUN mkdir -p dist/app/services/server/temp && chown -R node:node /home/node
 USER node
