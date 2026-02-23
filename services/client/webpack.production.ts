@@ -68,6 +68,7 @@ const config: Configuration = {
     new ProvidePlugin({
       process: "process/browser",
       Buffer: ["buffer", "Buffer"],
+      global: [path.join(__dirname, "src", "global-shim.ts"), "default"],
     }),
     new DotEnvPlugin({
       path: `.env.${process.env.NODE_ENV}`,

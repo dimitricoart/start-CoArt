@@ -65,6 +65,10 @@
    <!-- End Meta Pixel Code -->
   <div id="app"></div>
 
+  <!-- Must run before bundles: some chunks (e.g. typesense) expect `global`; webpack polyfill can run too late. -->
+  <script>
+    (function(){ var g = typeof globalThis !== 'undefined' ? globalThis : window; window.global = window.global || g; })();
+  </script>
   <script src="/vendors.js" type="text/javascript"></script>
   <script src="/mui.js" type="text/javascript"></script>
   <script src="/main.js" type="text/javascript"></script>
