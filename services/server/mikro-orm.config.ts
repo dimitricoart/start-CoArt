@@ -16,13 +16,28 @@ function parsePostgresUrl(url: string): {
   dbName: string;
 } {
   const u = new URL(url);
+  const dbName = u.pathname.replace(/^\//, "").split("/").filter(Boolean).pop() || "coart-development";
+  const user = decodeURIComponent(u.username || "postgres");
+  const password = decodeURIComponent(u.password || "");
+
+  const socketHost = u.searchParams.get("host");
+  if (socketHost && socketHost.startsWith("/")) {
+    return {
+      host: socketHost,
+      port: 5432,
+      user,
+      password,
+      dbName,
+    };
+  }
+
   const host = decodeURIComponent(u.hostname || "");
   return {
     host: host || "localhost",
     port: u.port ? parseInt(u.port, 10) : 5432,
-    user: decodeURIComponent(u.username),
-    password: decodeURIComponent(u.password),
-    dbName: u.pathname.replace(/^\//, "").split("/").filter(Boolean).pop() || "coart-development",
+    user,
+    password,
+    dbName,
   };
 }
 
