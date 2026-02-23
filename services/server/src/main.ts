@@ -31,10 +31,26 @@ async function bootstrap(): Promise<void> {
   const nodeEnv = configService.get<NodeEnv>("NODE_ENV", NodeEnv.development);
   const baseUrl = configService.get<string>("FE_URL", "http://localhost:3002");
 
+  const normalizeOrigin = (o: string) => o.replace(/\/+$/, "");
+  const allowedOrigins = new Set(
+    [
+      baseUrl,
+      // Production frontends
+      "https://coartmarket.com",
+      "https://www.coartmarket.com",
+    ]
+      .filter(Boolean)
+      .map(normalizeOrigin),
+  );
+
   // PUBLiC API
   app.enableCors({
     origin: (origin, callback) => {
-      if (nodeEnv === NodeEnv.development || !origin || origin === baseUrl) {
+      if (nodeEnv === NodeEnv.development || !origin) {
+        return callback(null, true);
+      }
+
+      if (origin && allowedOrigins.has(normalizeOrigin(origin))) {
         return callback(null, true);
       }
 
