@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { RouteObject } from "react-router";
 
 import { Protected } from "../components/protected";
@@ -14,7 +15,8 @@ import { AssetValidation } from "../pages/dashboard/assets/validation";
 import { OfferCreate } from "../pages/dashboard/offer/create";
 import { LedgerList } from "../pages/dashboard/ledger/list";
 import { AssetList } from "../pages/dashboard/assets/list";
-import { CreateFcc } from "../pages/fcc";
+
+const CreateFcc = lazy(() => import("../pages/fcc").then(m => ({ default: m.CreateFcc })));
 import { MerchantList } from "../pages/dashboard/merchants/list";
 import { MerchantUpdate } from "../pages/dashboard/merchants/update";
 import { ShowroomUpdate } from "../pages/dashboard/showroom/update";
@@ -102,7 +104,9 @@ export const protectedRoutes: Array<RouteObject> = [
     path: ROUTES.ASSET_FCC,
     element: (
       <Protected>
-        <CreateFcc />
+        <Suspense fallback={null}>
+          <CreateFcc />
+        </Suspense>
       </Protected>
     ),
   },

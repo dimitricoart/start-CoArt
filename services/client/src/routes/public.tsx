@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { RouteObject } from "react-router";
 
 import { Public } from "../components/public-route";
@@ -8,16 +9,18 @@ import { ForgotPassword } from "../pages/auth/forgot-password";
 import { RestorePassword } from "../pages/auth/restore-password";
 import { Landing } from "../pages/landing";
 import { ShowroomView } from "../pages/showroom/view";
-import { AssetView } from "../pages/asset/view";
-import { LedgerSearch } from "../pages/ledger/search";
 import { MerchantList } from "../pages/merchant/list";
 import { MerchantView } from "../pages/merchant/view";
 import { ProvenanceList } from "../pages/provenance/list";
 import { StripeCancel } from "../pages/stripe/cancel";
 import { StripeSuccess } from "../pages/stripe/success";
-import { Paywall } from "../pages/paywall";
 import { ROUTES } from "./routes";
-import { LedgerView } from "../pages/ledger/view";
+
+// Lazy-load routes that pull in react-pdf or typesense to avoid undefined module in main chunk
+const AssetView = lazy(() => import("../pages/asset/view").then(m => ({ default: m.AssetView })));
+const LedgerSearch = lazy(() => import("../pages/ledger/search").then(m => ({ default: m.LedgerSearch })));
+const LedgerView = lazy(() => import("../pages/ledger/view").then(m => ({ default: m.LedgerView })));
+const Paywall = lazy(() => import("../pages/paywall").then(m => ({ default: m.Paywall })));
 
 export const publicRoutes: Array<RouteObject> = [
   {
@@ -80,16 +83,27 @@ export const publicRoutes: Array<RouteObject> = [
 
   {
     path: ROUTES.ASSET_VIEW,
-    Component: AssetView,
+    element: (
+      <Suspense fallback={null}>
+        <AssetView />
+      </Suspense>
+    ),
   },
   {
     path: ROUTES.ASSET_SEARCH,
-    Component: LedgerSearch,
+    element: (
+      <Suspense fallback={null}>
+        <LedgerSearch />
+      </Suspense>
+    ),
   },
-
   {
     path: ROUTES.LEDGER_VIEW,
-    Component: LedgerView,
+    element: (
+      <Suspense fallback={null}>
+        <LedgerView />
+      </Suspense>
+    ),
   },
 
   {
@@ -102,6 +116,10 @@ export const publicRoutes: Array<RouteObject> = [
   },
   {
     path: ROUTES.PAYWALL,
-    Component: Paywall,
+    element: (
+      <Suspense fallback={null}>
+        <Paywall />
+      </Suspense>
+    ),
   },
 ];
