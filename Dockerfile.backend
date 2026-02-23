@@ -16,4 +16,4 @@ RUN npm run build
 EXPOSE ${PORT}
 RUN mkdir -p dist/app/services/server/temp && chown -R node:node /home/node
 USER node
-CMD [ "npm", "start" ]
+CMD npm run migration:up && npm start
