@@ -5,6 +5,12 @@ import { NodeEnv } from "@framework/constants";
 import { render } from "./utils/render";
 import { App } from "./routes";
 
+declare global {
+  interface Window {
+    __COART_BOOT__?: { startedAt: number; booted: boolean; errors: Array<Record<string, unknown>> };
+  }
+}
+
 try {
   init({
     dsn: process.env.NODE_ENV === NodeEnv.development ? void 0 : process.env.SENTRY_DSN,
@@ -21,6 +27,9 @@ if (typeof App === "undefined") {
 } else {
   try {
     render(App);
+    if (typeof window !== "undefined" && window.__COART_BOOT__) {
+      window.__COART_BOOT__.booted = true;
+    }
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
     const stack = e instanceof Error ? e.stack : "";

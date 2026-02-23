@@ -51,8 +51,9 @@ export default defineConfig(({ mode }) => {
       },
       rollupOptions: {
         output: {
-          entryFileNames: "main.js",
-          chunkFileNames: "chunks/[name]-[hash].js",
+          // IMPORTANT: use hashed filenames (nginx caches .js/.css as immutable for 1y)
+          entryFileNames: "assets/[name]-[hash].js",
+          chunkFileNames: "assets/chunks/[name]-[hash].js",
           assetFileNames: "assets/[name]-[hash][extname]",
         },
       },

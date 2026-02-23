@@ -53,6 +53,49 @@
   <!-- End Google tag (gtag.js) -->
 </head>
 <body>
+  <script>
+    (function () {
+      window.__COART_BOOT__ = { startedAt: Date.now(), booted: false, errors: [] };
+      function show(msg) {
+        try {
+          var el = document.getElementById("app");
+          if (!el) return;
+          el.innerHTML =
+            "<div style=\"padding:24px;font-family:system-ui;max-width:720px;\">" +
+            "<h2 style=\"color:#c00;\">App is not starting</h2>" +
+            "<pre style=\"white-space:pre-wrap;word-break:break-word;\">" +
+            String(msg)
+              .replace(/&/g, \"&amp;\")
+              .replace(/</g, \"&lt;\")
+              .replace(/>/g, \"&gt;\") +
+            "</pre>" +
+            "<div style=\"color:#666;font-size:12px;\">Check DevTools → Console/Network for details.</div>" +
+            "</div>";
+        } catch (_) {}
+      }
+      window.addEventListener("error", function (e) {
+        var target = e && e.target;
+        if (target && (target.tagName === "SCRIPT" || target.tagName === "LINK")) {
+          var url = target.src || target.href || "";
+          window.__COART_BOOT__.errors.push({ type: "resource", url: url });
+          show("Failed to load resource: " + url);
+        } else if (e && e.message) {
+          window.__COART_BOOT__.errors.push({ type: "error", message: e.message });
+          show(e.message);
+        }
+      }, true);
+      window.addEventListener("unhandledrejection", function (e) {
+        var reason = (e && e.reason) ? (e.reason.message || String(e.reason)) : "Unhandled promise rejection";
+        window.__COART_BOOT__.errors.push({ type: "rejection", message: reason });
+        show(reason);
+      });
+      setTimeout(function () {
+        if (!window.__COART_BOOT__.booted) {
+          show("App bundle loaded, but boot did not complete within 6s.");
+        }
+      }, 6000);
+    })();
+  </script>
    <!-- Meta Pixel Code (noscript moved from head for HTML5) -->
    <noscript>
      <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1788446221841095&ev=PageView&noscript=1" />
