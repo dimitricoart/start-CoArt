@@ -1,5 +1,6 @@
 # Check out https://hub.docker.com/_/node to select a new base image
-FROM node:24-alpine
+# Use Debian slim (glibc) instead of Alpine to avoid SIGABRT from native modules (Sentry, pg, etc.) on musl
+FROM node:24-slim
 ARG NPM_AUTH_TOKEN
 
 # Set to a non-root built-in user `node`
@@ -32,5 +33,7 @@ ENV PORT=8080
 
 EXPOSE 8080
 RUN mkdir -p dist/app/services/server/temp && chown -R node:node /home/node
+# So container logs appear before Node starts (helps debug "probe failed" when process crashes early)
+RUN chmod +x /home/node/dist/app/services/server/scripts/run-server.sh
 USER node
-CMD [ "npm", "start" ]
+CMD [ "sh", "scripts/run-server.sh" ]
