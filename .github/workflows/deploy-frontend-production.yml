@@ -25,16 +25,6 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v6
-        with:
-          ref: ${{ github.ref }}
-
-      - name: Show deploy source
-        run: |
-          echo "Repository: ${{ github.repository }}"
-          echo "Ref: ${{ github.ref }}"
-          echo "SHA: ${{ github.sha }}"
-          echo "Branch: ${{ github.ref_name }}"
-          git log -1 --oneline
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v3
@@ -46,25 +36,17 @@ jobs:
         uses: google-github-actions/setup-gcloud@v3
         with:
           project_id: ${{ env.GCP_PROJECT_ID }}
+          export_default_credentials: true
 
       - name: Install root dependencies
         run: |
-          cat <<'EOF' > .npmrc
-          save-exact=true
-          package-lock=false
-          legacy-peer-deps=true
-          EOF
           npm i
           npm run build
 
-      - name: Clean client build output
-        run: rm -rf services/client/dist
-
-      - name: Build client
+      - name: Install client dependencies
         working-directory: services/client
         env:
           BE_URL: ${{ vars.BE_URL }}
-          SENTRY_DSN: ${{ vars.SENTRY_DSN }}
           FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
           FIREBASE_AUTH_DOMAIN: ${{ vars.FIREBASE_AUTH_DOMAIN }}
           FIREBASE_PROJECT_ID: ${{ vars.FIREBASE_PROJECT_ID }}
@@ -72,6 +54,7 @@ jobs:
           FIREBASE_MESSAGE_SENDER_ID: ${{ vars.FIREBASE_MESSAGE_SENDER_ID }}
           FIREBASE_APP_ID: ${{ vars.FIREBASE_APP_ID }}
           FIREBASE_MEASUREMENT_ID: ${{ vars.FIREBASE_MEASUREMENT_ID }}
+          ETHBERRY_API_KEY: ${{ secrets.ETHBERRY_API_KEY }}
           TYPESENSE_HOST: ${{ vars.TYPESENSE_HOST }}
           TYPESENSE_PORT: ${{ vars.TYPESENSE_PORT }}
           TYPESENSE_PROTOCOL: ${{ vars.TYPESENSE_PROTOCOL }}
@@ -81,48 +64,26 @@ jobs:
           GOOGLE_STORAGE_BUCKET_DOCUMENTS: ${{ vars.GOOGLE_STORAGE_BUCKET_DOCUMENTS }}
           GOOGLE_STORAGE_BUCKET_AGREEMENTS: ${{ vars.GOOGLE_STORAGE_BUCKET_AGREEMENTS }}
         run: |
-          if [ -z "$${BE_URL}" ]; then
-            echo "::error::BE_URL is not set in GitHub Environment (production). Set it in Settings → Environments → production → Variables, then re-run."
-            exit 1
-          fi
-          export NODE_ENV=production
           cat <<EOF > .env.production
-          BE_URL=$${BE_URL}
-          SENTRY_DSN=$${SENTRY_DSN}
-          FIREBASE_API_KEY=$${FIREBASE_API_KEY}
-          FIREBASE_AUTH_DOMAIN=$${FIREBASE_AUTH_DOMAIN}
-          FIREBASE_PROJECT_ID=$${FIREBASE_PROJECT_ID}
-          FIREBASE_STORAGE_BUCKET=$${FIREBASE_STORAGE_BUCKET}
-          FIREBASE_MESSAGE_SENDER_ID=$${FIREBASE_MESSAGE_SENDER_ID}
-          FIREBASE_APP_ID=$${FIREBASE_APP_ID}
-          FIREBASE_MEASUREMENT_ID=$${FIREBASE_MEASUREMENT_ID}
-          TYPESENSE_HOST=$${TYPESENSE_HOST}
-          TYPESENSE_PORT=$${TYPESENSE_PORT}
-          TYPESENSE_PROTOCOL=$${TYPESENSE_PROTOCOL}
-          TYPESENSE_API_KEY=$${TYPESENSE_API_KEY}
-          GOOGLE_STORAGE_BUCKET_STATIC=$${GOOGLE_STORAGE_BUCKET_STATIC}
-          GOOGLE_STORAGE_BUCKET_ARTWORKS=$${GOOGLE_STORAGE_BUCKET_ARTWORKS}
-          GOOGLE_STORAGE_BUCKET_DOCUMENTS=$${GOOGLE_STORAGE_BUCKET_DOCUMENTS}
-          GOOGLE_STORAGE_BUCKET_AGREEMENTS=$${GOOGLE_STORAGE_BUCKET_AGREEMENTS}
+          BE_URL=${BE_URL}
+          FIREBASE_API_KEY=${FIREBASE_API_KEY}
+          FIREBASE_AUTH_DOMAIN=${FIREBASE_AUTH_DOMAIN}
+          FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+          FIREBASE_STORAGE_BUCKET=${FIREBASE_STORAGE_BUCKET}
+          FIREBASE_MESSAGE_SENDER_ID=${FIREBASE_MESSAGE_SENDER_ID}
+          FIREBASE_APP_ID=${FIREBASE_APP_ID}
+          FIREBASE_MEASUREMENT_ID=${FIREBASE_MEASUREMENT_ID}
+          ETHBERRY_API_KEY=${ETHBERRY_API_KEY}
+          TYPESENSE_HOST=${TYPESENSE_HOST}
+          TYPESENSE_PORT=${TYPESENSE_PORT}
+          TYPESENSE_PROTOCOL=${TYPESENSE_PROTOCOL}
+          TYPESENSE_API_KEY=${TYPESENSE_API_KEY}
+          GOOGLE_STORAGE_BUCKET_STATIC=${GOOGLE_STORAGE_BUCKET_STATIC}
+          GOOGLE_STORAGE_BUCKET_ARTWORKS=${GOOGLE_STORAGE_BUCKET_ARTWORKS}
+          GOOGLE_STORAGE_BUCKET_DOCUMENTS=${GOOGLE_STORAGE_BUCKET_DOCUMENTS}
+          GOOGLE_STORAGE_BUCKET_AGREEMENTS=${GOOGLE_STORAGE_BUCKET_AGREEMENTS}
           EOF
           npm run build
-
-      - name: Verify bundle has no ethberry
-        run: |
-          if grep -r "ethberry" services/client/dist/*.js 2>/dev/null; then
-            echo "::error::Build still contains @ethberry. Remove all ethberry imports from src and re-run."
-            exit 1
-          fi
-          echo "Bundle check passed: no ethberry references."
-
-      - name: Verify source maps exist
-        run: |
-          ls -la services/client/dist/*.map 2>/dev/null || true
-          if [ ! -f services/client/dist/main.js.map ]; then
-            echo "::error::main.js.map missing after build. DevTools will not show original source."
-            exit 1
-          fi
-          echo "Source maps OK: main.js.map present."
 
       - name: Configure Artifact Registry authentication
         run: gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev --quiet
@@ -135,8 +96,6 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker build \
-            --platform linux/amd64 \
-            --no-cache \
             -f Dockerfile.frontend \
             -t "$IMAGE_URI" \
             .
@@ -159,3 +118,4 @@ jobs:
             --ingress internal-and-cloud-load-balancing \
             --allow-unauthenticated \
             --quiet
+
