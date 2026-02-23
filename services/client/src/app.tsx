@@ -1,3 +1,5 @@
+import "./global.css";
+
 import { FC, PropsWithChildren } from "react";
 import { SnackbarProvider } from "notistack";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -14,7 +16,6 @@ import { LocalizationProvider } from "./libs/providers/localization-provider";
 import { ThemeProvider } from "./components/theme-provider";
 import { PickerProvider } from "./libs/providers/picker-provider";
 import { i18n } from "./i18n";
-import { globalStyles } from "./components/globalStyles";
 import { muiLexicalStyles } from "./libs/lexical-styles";
 
 const queryClient = new QueryClient();
@@ -37,7 +38,7 @@ export const Providers: FC<PropsWithChildren> = props => {
           <LicenseProvider>
             <UserProvider>
               <ThemeProvider>
-                <Global styles={[globalStyles, ...muiLexicalStyles]} />
+                <Global styles={muiLexicalStyles} />
                 <LocalizationProvider i18n={i18n} defaultLanguage={EnabledLanguages.EN}>
                   <PickerProvider>
                     <SnackbarProvider

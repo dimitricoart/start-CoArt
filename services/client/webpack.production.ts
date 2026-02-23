@@ -31,7 +31,16 @@ const config: Configuration = {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              url: { filter: (url: string) => !url.startsWith("/") },
+            },
+          },
+          "postcss-loader",
+        ],
       },
       {
         test: /\.(ttf|woff|woff2|eot|gif|png|ico)(\?.+)?$/,
