@@ -68,7 +68,7 @@ jobs:
             --min-instances 0 \
             --max-instances 10 \
             --update-env-vars "NODE_ENV=production" \
-            --set-secrets "POSTGRES_URL=POSTGRES_URL" \
+            --set-secrets "POSTGRES_URL=POSTGRES_URL:latest" \
             --allow-unauthenticated \
             --quiet
           echo "If the container fails to start, add more secrets via --set-secrets or set env in Cloud Run console and check logs."
