@@ -12,7 +12,8 @@ export enum OfferStatus {
 export interface IOffer extends IUuidBase, IDateBase {
   asset?: IAsset;
   merchant?: IMerchant;
-  fractions: bigint;
+  /** API returns string (bigint serialization); backend uses bigint */
+  fractions: string | bigint;
   price: number;
   offerStatus: OfferStatus;
 }

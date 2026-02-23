@@ -26,7 +26,7 @@ export const tableBodyData: TBodyData = [
     align: "left",
   }),
   row => ({
-    content: <FormattedNumber value={row.fractions} />,
+    content: <FormattedNumber value={Number(row.fractions)} />,
     align: "right",
   }),
   row => ({

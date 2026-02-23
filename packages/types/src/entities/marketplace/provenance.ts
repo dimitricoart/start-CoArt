@@ -8,7 +8,8 @@ export interface IProvenance extends IUuidBase, IDateBase {
   asset?: IAsset;
   name: string;
   price: number;
-  fractions: number;
-  txHash: bigint;
+  /** API returns string (bigint serialization); use Number() when needed for math */
+  fractions: string | number;
+  txHash: string;
   agreementUrl: string;
 }

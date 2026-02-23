@@ -96,12 +96,14 @@ export const generatePurchaseAgreement = async (name: string, document: IDocumen
     setTextFieldWithFont("buyer", name);
     setTextFieldWithFont("buyer2", name);
 
-    setTextFieldWithFont("fractions1", (offer.asset?.fractions || 0n).toString());
-    setTextFieldWithFont("fractions2", (offer.asset?.fractions || 0n).toString());
+    const assetFractions = offer.asset?.fractions != null ? String(offer.asset.fractions) : "0";
+    setTextFieldWithFont("fractions1", assetFractions);
+    setTextFieldWithFont("fractions2", assetFractions);
 
     setTextFieldWithFont("artwork_name", offer.asset?.title || "");
 
-    setTextFieldWithFont("price_per_fraction", (Number(offer.price) / Number(offer.fractions)).toFixed(2));
+    const offerFractions = Number(offer.fractions);
+    setTextFieldWithFont("price_per_fraction", (offerFractions ? Number(offer.price) / offerFractions : 0).toFixed(2));
     setTextFieldWithFont("description", getMarkdown(offer.asset?.description || emptyStateString));
     setTextFieldWithFont("opinion", "N/A");
 

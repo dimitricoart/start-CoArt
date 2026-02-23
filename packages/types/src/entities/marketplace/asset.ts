@@ -158,7 +158,8 @@ export interface IAsset extends IUuidBase, IDateBase, ISearchable {
   subject: SubjectType;
   style: StyleType;
 
-  fractions: bigint;
+  /** API returns string (bigint serialization); backend uses bigint */
+  fractions: string | bigint;
   favorites: Array<IFavorite>;
   material: MaterialType;
 

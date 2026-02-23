@@ -5,5 +5,6 @@ import type { IMerchant } from "../infrastructure";
 export interface ILedger extends IUuidBase {
   asset?: IAsset;
   merchant?: IMerchant;
-  fractions: bigint;
+  /** API returns string (bigint serialization); backend uses bigint */
+  fractions: string | bigint;
 }
