@@ -27,10 +27,13 @@ export class ProdAddMissingColumns1769500000000 extends Migration {
     this.addSql(`
       UPDATE ${ns}.merchant m
       SET
-        priority = COALESCE(s.priority, 0),
-        background_image_url = COALESCE(m.background_image_url, s.background_image_url)
+        priority = COALESCE(s.s_priority, 0),
+        background_image_url = COALESCE(m.background_image_url, s.s_background_image_url)
       FROM (
-        SELECT DISTINCT ON (merchant_id) merchant_id, priority, background_image_url
+        SELECT DISTINCT ON (merchant_id)
+          merchant_id,
+          priority AS s_priority,
+          background_image_url AS s_background_image_url
         FROM ${ns}.showroom
         ORDER BY merchant_id, is_default DESC, id
       ) s
