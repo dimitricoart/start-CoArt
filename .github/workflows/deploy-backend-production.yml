@@ -47,6 +47,7 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker build \
+            --platform linux/amd64 \
             --no-cache \
             --build-arg NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }} \
             -f Dockerfile.backend \
@@ -66,7 +67,7 @@ jobs:
             --cpu-boost \
             --min-instances 0 \
             --max-instances 10 \
-            --update-env-vars "NODE_ENV=production,PORT=8080" \
+            --update-env-vars "NODE_ENV=production" \
             --allow-unauthenticated \
             --quiet
           echo "If the container fails to start, set POSTGRES_* (or POSTGRES_URL) and other env in Cloud Run console and check logs."

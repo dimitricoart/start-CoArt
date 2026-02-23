@@ -135,6 +135,7 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker build \
+            --platform linux/amd64 \
             --no-cache \
             -f Dockerfile.frontend \
             -t "$IMAGE_URI" \
