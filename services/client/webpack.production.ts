@@ -88,24 +88,9 @@ const config: Configuration = {
   stats: "errors-only",
   optimization: {
     minimize: true,
-    splitChunks: {
-      cacheGroups: {
-        // Exclude react-pdf/pdfjs-dist so they stay in the lazy PDF chunk; otherwise they end up in vendors
-        // and can cause "Cannot read properties of undefined (reading 'call')" when vendors loads (e.g. with LedgerSearch).
-        vendors: {
-          test: /[\\/]node_modules[\\/]((?!@mui|react-pdf|pdfjs-dist).*)[\\/]/,
-          name: "vendors",
-          chunks: "all",
-          enforce: true,
-        },
-        mui: {
-          test: /[\\/]node_modules[\\/]@mui[\\/]/,
-          name: "mui",
-          chunks: "all",
-          enforce: true,
-        },
-      },
-    },
+    // No splitChunks: one main bundle avoids "make namespace object" / undefined .call
+    // when chunks load in wrong order (vendors vs main). Lazy routes still get async chunks.
+    splitChunks: false,
   },
   watchOptions: {
     aggregateTimeout: 0,
