@@ -1,9 +1,9 @@
 import React from "react";
 import { ChipProps as MuiChipProps } from "@mui/material";
 
-import { ChipStatus, StyledChip } from "./styled";
+import { type ChipStatus, StyledChip } from "./styled";
 
-export { ChipStatus };
+export type { ChipStatus };
 
 interface IChipProps extends MuiChipProps {
   status?: ChipStatus;
