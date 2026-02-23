@@ -49,12 +49,19 @@ jobs:
         run: npm run build
 
       # Migrations only add/backfill columns where needed; existing data is never dropped or overwritten.
+      # POSTGRES_URL must be set in repo Secrets (production DB). For Cloud SQL private IP, use a URL
+      # that the runner can reach (e.g. via Cloud SQL Auth Proxy or public IP + authorized networks).
       - name: Run database migrations
         working-directory: services/server
         env:
           NODE_ENV: production
           POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
-        run: npm run migration:up
+        run: |
+          if [ -z "$POSTGRES_URL" ]; then
+            echo "::error::POSTGRES_URL is not set. Add it in Settings > Secrets and variables > Actions (e.g. from Cloud SQL connection name or a reachable URL)."
+            exit 1
+          fi
+          npm run migration:up
 
       - name: Build metadata
         run: |
