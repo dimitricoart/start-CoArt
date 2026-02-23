@@ -115,6 +115,15 @@ jobs:
           fi
           echo "Bundle check passed: no ethberry references."
 
+      - name: Verify source maps exist
+        run: |
+          ls -la services/client/dist/*.map 2>/dev/null || true
+          if [ ! -f services/client/dist/main.js.map ]; then
+            echo "::error::main.js.map missing after build. DevTools will not show original source."
+            exit 1
+          fi
+          echo "Source maps OK: main.js.map present."
+
       - name: Configure Artifact Registry authentication
         run: gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev --quiet
 

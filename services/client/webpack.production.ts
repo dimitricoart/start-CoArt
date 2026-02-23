@@ -15,6 +15,7 @@ const config: Configuration = {
   output: {
     path: path.join(__dirname, "dist"),
     publicPath: "/",
+    sourceMapFilename: "[file].map",
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
