@@ -1,13 +1,10 @@
 import { pdfjs } from "react-pdf";
-import "pdfjs-dist/build/pdf.worker.min.mjs";
 
 export const isPdfJsSupported = async () => {
   // old Safari has no URL.parse
   if (typeof URL === "undefined" || typeof URL.parse === "undefined") {
     return false;
   }
-
-  // pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
   try {
     const loadingTask = pdfjs.getDocument({

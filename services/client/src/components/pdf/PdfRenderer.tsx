@@ -1,21 +1,22 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { Document, Page } from "react-pdf";
+import { Document, Page, pdfjs } from "react-pdf";
 import { FormattedMessage } from "react-intl";
 import { Box, Typography } from "@mui/material";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
-import "pdfjs-dist/build/pdf.worker.min.mjs";
 
 import { StyledDocumentContainer, StyledPageIndicator, StyledRoot } from "./styled";
 import { DocumentError, DocumentLoading, PageLoading, ScrollToEndIndicator } from "./components";
+
+// Worker must be set via URL; importing the worker file as a module breaks the webpack bundle (undefined .call)
+if (typeof window !== "undefined") {
+  pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+}
 
 interface IPdfRendererProps {
   fileUrl: string;
   onScrollToEnd?: () => void;
 }
-
-// Configure pdf.js worker from npm package
-// pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 export const PdfRenderer: FC<IPdfRendererProps> = props => {
   const { fileUrl, onScrollToEnd } = props;
