@@ -17,7 +17,36 @@ try {
 }
 
 if (typeof App === "undefined") {
-  throw new Error("[App] Router/App module failed to load. Check for missing or circular dependencies and that env (e.g. BE_URL) is set for production build.");
+  showBootError("[App] Router/App module failed to load. Check for missing or circular dependencies and that env (e.g. BE_URL) is set for production build.");
+} else {
+  try {
+    render(App);
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    const stack = e instanceof Error ? e.stack : "";
+    showBootError(msg, stack);
+    throw e;
+  }
 }
 
-render(App);
+function showBootError(message: string, stack?: string): void {
+  const container = document.getElementById("app");
+  if (!container) return;
+  container.innerHTML =
+    "<div style=\"padding:24px;font-family:system-ui;max-width:600px;\">" +
+    "<h2 style=\"color:#c00;\">Application failed to start</h2>" +
+    "<pre style=\"white-space:pre-wrap;word-break:break-all;\">" +
+    escapeHtml(message) +
+    "</pre>" +
+    (stack ? "<pre style=\"font-size:11px;color:#666;\">" + escapeHtml(stack) + "</pre>" : "") +
+    "</div>";
+  console.error("[boot]", message, stack ?? "");
+}
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
