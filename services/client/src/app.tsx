@@ -24,7 +24,16 @@ export const Providers: FC<PropsWithChildren> = props => {
   return (
     <QueryClientProvider client={queryClient}>
       <ReduxProvider store={store}>
-        <ApiProvider baseUrl={process.env.BE_URL ?? ""} storageName={ns}>
+        <ApiProvider
+          baseUrl={
+            process.env.BE_URL ||
+            (typeof window !== "undefined" &&
+            (window.location.hostname === "coartmarket.com" || window.location.hostname === "www.coartmarket.com")
+              ? "https://api.coartmarket.com"
+              : "")
+          }
+          storageName={ns}
+        >
           <LicenseProvider>
             <UserProvider>
               <ThemeProvider>

@@ -15,7 +15,6 @@ const config: Configuration = {
   output: {
     path: path.join(__dirname, "dist"),
     publicPath: "/",
-    sourceMapFilename: "[file].map",
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
@@ -68,7 +67,6 @@ const config: Configuration = {
     new ProvidePlugin({
       process: "process/browser",
       Buffer: ["buffer", "Buffer"],
-      global: [path.join(__dirname, "src", "global-shim.ts"), "default"],
     }),
     new DotEnvPlugin({
       path: `.env.${process.env.NODE_ENV}`,
@@ -88,9 +86,16 @@ const config: Configuration = {
   stats: "errors-only",
   optimization: {
     minimize: true,
-    // No splitChunks: one main bundle avoids "make namespace object" / undefined .call
-    // when chunks load in wrong order (vendors vs main). Lazy routes still get async chunks.
-    splitChunks: false,
+    splitChunks: {
+      cacheGroups: {
+        mui: {
+          test: /[\\/]node_modules[\\/]@mui[\\/]/,
+          name: "mui",
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
   },
   watchOptions: {
     aggregateTimeout: 0,
