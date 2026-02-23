@@ -89,8 +89,10 @@ const config: Configuration = {
     minimize: true,
     splitChunks: {
       cacheGroups: {
+        // Exclude react-pdf/pdfjs-dist so they stay in the lazy PDF chunk; otherwise they end up in vendors
+        // and can cause "Cannot read properties of undefined (reading 'call')" when vendors loads (e.g. with LedgerSearch).
         vendors: {
-          test: /[\\/]node_modules[\\/]((?!@mui).*)[\\/]/,
+          test: /[\\/]node_modules[\\/]((?!@mui|react-pdf|pdfjs-dist).*)[\\/]/,
           name: "vendors",
           chunks: "all",
           enforce: true,

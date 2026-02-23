@@ -1,13 +1,15 @@
-import { FC, useEffect, useState } from "react";
+import { FC, lazy, Suspense, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import { IOffer, IAsset, IAssetTokenizeDto } from "@framework/types";
 
 import { PdfPlaceholder } from "./PdfPlaceholder";
-import { PdfRenderer } from "./PdfRenderer";
 import { isPdfJsSupported } from "./utils";
 import { generatePurchaseAgreement, generateListingAgreement, IDocument } from "./pdf";
 import { DocumentPrepare } from "./components";
+
+// Lazy-load so react-pdf chunk only loads when we actually show a PDF (avoids undefined module in main/vendors).
+const PdfRenderer = lazy(() => import("./PdfRenderer").then(m => ({ default: m.PdfRenderer })));
 
 interface IPdfPreviewProps {
   document: IDocument;
@@ -62,5 +64,9 @@ export const PdfPreview: FC<IPdfPreviewProps> = props => {
     return <PdfPlaceholder fileUrl={pdfUrl} onScrollToEnd={onScrollToEnd} />;
   }
 
-  return <PdfRenderer fileUrl={pdfUrl} onScrollToEnd={onScrollToEnd} />;
+  return (
+    <Suspense fallback={<DocumentPrepare />}>
+      <PdfRenderer fileUrl={pdfUrl} onScrollToEnd={onScrollToEnd} />
+    </Suspense>
+  );
 };
