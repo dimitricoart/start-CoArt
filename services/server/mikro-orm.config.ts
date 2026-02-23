@@ -15,7 +15,11 @@ function parsePostgresUrl(url: string): {
   password: string;
   dbName: string;
 } {
-  const u = new URL(url);
+  let normalized = url.trim();
+  if (normalized.includes("@/") && !normalized.match(/@[^/]+\./)) {
+    normalized = normalized.replace("@/", "@localhost/");
+  }
+  const u = new URL(normalized);
   const dbName = u.pathname.replace(/^\//, "").split("/").filter(Boolean).pop() || "coart-development";
   const user = decodeURIComponent(u.username || "postgres");
   const password = decodeURIComponent(u.password || "");
