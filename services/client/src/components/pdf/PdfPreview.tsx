@@ -1,15 +1,11 @@
-import { FC, lazy, Suspense, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import { IOffer, IAsset, IAssetTokenizeDto } from "@framework/types";
 
-import { PdfPlaceholder } from "./PdfPlaceholder";
-import { isPdfJsSupported } from "./utils";
+import { PdfRenderer } from "./PdfRenderer";
 import { generatePurchaseAgreement, generateListingAgreement, IDocument } from "./pdf";
 import { DocumentPrepare } from "./components";
-
-// Lazy-load so react-pdf chunk only loads when we actually show a PDF (avoids undefined module in main/vendors).
-const PdfRenderer = lazy(() => import("./PdfRenderer").then(m => ({ default: m.PdfRenderer })));
 
 interface IPdfPreviewProps {
   document: IDocument;
@@ -20,27 +16,11 @@ interface IPdfPreviewProps {
 }
 
 export const PdfPreview: FC<IPdfPreviewProps> = props => {
-  const { document, onScrollToEnd, onPdfNotSupported, offer, asset } = props;
+  const { document, onScrollToEnd, offer, asset } = props;
   const [pdfUrl, setPdfUrl] = useState<string>("");
-  const [isPdfSupported, setIsPdfSupported] = useState<boolean | null>(null);
 
   const form = useFormContext<IAssetTokenizeDto>();
   const name = form.watch("name");
-
-  useEffect(() => {
-    void (async () => {
-      try {
-        const isSupported = await isPdfJsSupported();
-        setIsPdfSupported(isSupported);
-        if (!isSupported) {
-          onPdfNotSupported?.();
-        }
-      } catch {
-        setIsPdfSupported(false);
-        onPdfNotSupported?.();
-      }
-    })();
-  }, [onPdfNotSupported]);
 
   useEffect(() => {
     void (async () => {
@@ -59,14 +39,5 @@ export const PdfPreview: FC<IPdfPreviewProps> = props => {
     return <DocumentPrepare />;
   }
 
-  // Если PDF.js не поддерживается, показываем placeholder
-  if (isPdfSupported === false) {
-    return <PdfPlaceholder fileUrl={pdfUrl} onScrollToEnd={onScrollToEnd} />;
-  }
-
-  return (
-    <Suspense fallback={<DocumentPrepare />}>
-      <PdfRenderer fileUrl={pdfUrl} onScrollToEnd={onScrollToEnd} />
-    </Suspense>
-  );
+  return <PdfRenderer fileUrl={pdfUrl} onScrollToEnd={onScrollToEnd} />;
 };

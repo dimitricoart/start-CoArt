@@ -1,18 +1,14 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
-import { FormattedMessage } from "react-intl";
-import { Box, Typography } from "@mui/material";
-import "react-pdf/dist/Page/AnnotationLayer.css";
-import "react-pdf/dist/Page/TextLayer.css";
+import { FC, useCallback, useRef, useState } from "react";
 
-import { StyledDocumentContainer, StyledPageIndicator, StyledRoot } from "./styled";
-import { DocumentError, DocumentLoading, PageLoading, ScrollToEndIndicator } from "./components";
+import { Box } from "@mui/material";
 
-// Worker must be set via URL; importing the worker file as a module breaks the webpack bundle (undefined .call)
-if (typeof window !== "undefined") {
-  pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
-}
+import { StyledDocumentContainer, StyledRoot } from "./styled";
+import { DocumentLoading } from "./components";
 
+/**
+ * PDF viewer via iframe (blob URL). Avoids react-pdf/pdfjs-dist in the bundle,
+ * which was causing "Cannot read properties of undefined (reading 'call')" in production.
+ */
 interface IPdfRendererProps {
   fileUrl: string;
   onScrollToEnd?: () => void;
@@ -20,121 +16,35 @@ interface IPdfRendererProps {
 
 export const PdfRenderer: FC<IPdfRendererProps> = props => {
   const { fileUrl, onScrollToEnd } = props;
-  const [numPages, setNumPages] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [hasScrolledToEnd, setHasScrolledToEnd] = useState<boolean>(false);
-  const [isScrollDetectionEnabled, setIsScrollDetectionEnabled] = useState<boolean>(false);
-  const [pageWidth, setPageWidth] = useState<number>(600);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(true);
+  const reportedRef = useRef(false);
 
-  // Calculate page width on mount and resize
-  useEffect(() => {
-    const updateWidth = () => {
-      if (containerRef.current) {
-        const containerWidth = containerRef.current.clientWidth;
-        setPageWidth(Math.min(containerWidth - 40, 700));
-      }
-    };
-
-    updateWidth();
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
-  }, []);
-
-  const onDocumentLoadSuccess = useCallback(
-    ({ numPages }: { numPages: number }) => {
-      setNumPages(numPages);
-      setHasScrolledToEnd(false);
-      setTimeout(() => {
-        setIsScrollDetectionEnabled(true);
-        // If content is not scrollable (fits into container), consider it as scrolled to end
-        const container = containerRef.current;
-        if (container) {
-          const { scrollHeight, clientHeight } = container;
-          if (scrollHeight <= clientHeight && !hasScrolledToEnd) {
-            setHasScrolledToEnd(true);
-            onScrollToEnd?.();
-          }
-        }
-      }, 500);
-    },
-    [hasScrolledToEnd, onScrollToEnd],
-  );
-
-  const handleScroll = useCallback(() => {
-    if (!containerRef.current || !isScrollDetectionEnabled) return;
-
-    const container = containerRef.current;
-    const scrollTop = container.scrollTop;
-    const scrollHeight = container.scrollHeight;
-    const clientHeight = container.clientHeight;
-
-    // Calculate current page based on scroll position
-    if (numPages > 0) {
-      const pageHeight = scrollHeight / numPages;
-      const newPage = Math.min(numPages, Math.floor(scrollTop / pageHeight) + 1);
-      setCurrentPage(newPage);
+  const onIframeLoad = useCallback(() => {
+    setLoading(false);
+    if (onScrollToEnd && !reportedRef.current) {
+      reportedRef.current = true;
+      onScrollToEnd();
     }
-
-    // Check if scrolled to bottom
-    const isAtBottom = scrollTop + clientHeight >= scrollHeight - 10;
-    if (isAtBottom && !hasScrolledToEnd) {
-      setHasScrolledToEnd(true);
-      onScrollToEnd?.();
-    }
-  }, [numPages, hasScrolledToEnd, onScrollToEnd, isScrollDetectionEnabled]);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener("scroll", handleScroll);
-      return () => container.removeEventListener("scroll", handleScroll);
-    }
-    return undefined;
-  }, [handleScroll]);
-
-  const scrollToDocumentEnd = () => {
-    containerRef.current?.scrollTo({
-      top: containerRef.current?.scrollHeight,
-      behavior: "smooth",
-    });
-  };
+  }, [onScrollToEnd]);
 
   return (
     <StyledRoot>
-      {/* Page indicator */}
-      {numPages > 0 && (
-        <StyledPageIndicator>
-          <Typography variant="subtitle1">
-            <FormattedMessage id="form.pdf.pageIndicator" values={{ current: currentPage, total: numPages }} />
-          </Typography>
-        </StyledPageIndicator>
+      {loading && (
+        <Box position="absolute" top={0} left={0} right={0} bottom={0} display="flex" alignItems="center" justifyContent="center" zIndex={1}>
+          <DocumentLoading />
+        </Box>
       )}
-
-      {/* Scroll to end indicator */}
-      {numPages > 0 && !hasScrolledToEnd && <ScrollToEndIndicator scrollToDocumentEnd={scrollToDocumentEnd} />}
-
-      <StyledDocumentContainer ref={containerRef}>
-        <Document
-          file={fileUrl}
-          onLoadSuccess={onDocumentLoadSuccess}
-          loading={<DocumentLoading />}
-          error={<DocumentError />}
-          className="flex flex-col items-center gap-4"
-        >
-          {Array.from(new Array(numPages), (el, index) => (
-            <Box key={`page_${index + 1}`} className="relative">
-              <Page
-                pageNumber={index + 1}
-                width={pageWidth}
-                className="shadow-lg rounded-lg overflow-hidden bg-white"
-                renderTextLayer={true}
-                renderAnnotationLayer={true}
-                loading={<PageLoading pageWidth={pageWidth} />}
-              />
-            </Box>
-          ))}
-        </Document>
+      <StyledDocumentContainer sx={{ minHeight: 560 }}>
+        <iframe
+          title="PDF document"
+          src={fileUrl}
+          onLoad={onIframeLoad}
+          style={{
+            width: "100%",
+            minHeight: 560,
+            border: "none",
+          }}
+        />
       </StyledDocumentContainer>
     </StyledRoot>
   );
