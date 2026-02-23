@@ -45,6 +45,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Migrations only add/backfill columns where needed; existing data is never dropped or overwritten.
       - name: Run database migrations
         working-directory: services/server
         env:
