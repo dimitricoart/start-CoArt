@@ -1,4 +1,4 @@
-import { ISearchable, IUuidBase } from "../../dto";
+import { IDateBase, ISearchable, IUuidBase } from "../../dto";
 import type { IWallet } from "../blockchain";
 import type { IAsset, IShowroom } from "../marketplace";
 import type { IUser } from "./user";
@@ -9,7 +9,7 @@ export enum MerchantStatus {
   PENDING = "PENDING",
 }
 
-export interface IMerchant extends IUuidBase, ISearchable {
+export interface IMerchant extends IUuidBase, IDateBase, ISearchable {
   subtitle: string;
   email: string;
   imageUrl: string;

@@ -18,17 +18,17 @@ export const Favorites: FC = () => {
       <PageHeader sx={{ margin: 0, mb: 4 }} message="pages.dashboard.favorites.title" />
 
       <ProgressOverlay isLoading={isLoading}>
-        {favorites?.rows.length ? (
-          <AssetGrid assets={favorites.rows.map(favorite => favorite.asset!)} isDashBoard />
+        {favorites?.data?.length ? (
+          <AssetGrid assets={favorites.data.map(favorite => favorite.asset!)} isDashBoard />
         ) : (
           <EmptyList />
         )}
 
-        {!!favorites?.count && favorites?.count > defaultItemsPerPage && (
+        {!!favorites?.total && favorites?.total > defaultItemsPerPage && (
           <StyledPagination
             shape="rounded"
             page={skip / take + 1}
-            count={Math.ceil(favorites.count / take)}
+            count={Math.ceil(favorites.total / take)}
             onChange={onChangePage}
           />
         )}

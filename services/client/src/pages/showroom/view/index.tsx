@@ -1,5 +1,5 @@
 import { FC, Fragment } from "react";
-import { Grid, Stack, Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { FormattedMessage } from "react-intl";
@@ -39,7 +39,15 @@ export const ShowroomView: FC = () => {
               <Typography variant="ralewayRegular" fontSize={sizeDecreaseCalc(58, 35)} lineHeight={"normal"}>
                 {showroom.title}
               </Typography>
-              <Display data={showroom.subtitle} />
+              <Box
+                sx={{
+                  fontSize: "0.875rem",
+                  lineHeight: 1.4,
+                  "& .MuiTypography-root": { fontSize: "inherit", fontWeight: 400 },
+                }}
+              >
+                <Display data={showroom.subtitle} />
+              </Box>
             </StyledShowroomContent>
 
             <Stack paddingInline={2} width="100%">

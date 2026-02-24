@@ -148,7 +148,8 @@ export interface IAsset extends IUuidBase, IDateBase, ISearchable {
   photos?: Array<IPhoto>;
   documents?: Array<IDocument>;
   provenance?: Array<IProvenance>;
-  merchant?: IMerchant;
+  /** API list may return UUID string; single-item may return populated object */
+  merchant?: string | IMerchant;
   token?: IToken;
 
   isCopyright: boolean;

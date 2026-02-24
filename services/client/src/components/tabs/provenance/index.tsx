@@ -38,7 +38,7 @@ export const ProvenanceTabContent = (props: IProvenanceProps) => {
     enabled: true,
   });
 
-  if (!provenance?.rows?.length) {
+  if (!provenance?.data?.length) {
     return <EmptyList />;
   }
 
@@ -82,7 +82,7 @@ export const ProvenanceTabContent = (props: IProvenanceProps) => {
                 </TableRow>
               </StyledTableHead>
               <StyledTableBody>
-                {provenance.rows.map(row => (
+                {provenance.data.map(row => (
                   <TableRow key={row.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                     {tableBody
                       .map(callback => callback(row))
@@ -99,7 +99,7 @@ export const ProvenanceTabContent = (props: IProvenanceProps) => {
         )}
         {isMd && (
           <Fragment>
-            {provenance.rows.map(p => (
+            {provenance.data.map(p => (
               <StyledTableCard container key={p.id} size={12}>
                 {tableHead.map(({ id }, i) => {
                   const { content } = tableBody[i](p);

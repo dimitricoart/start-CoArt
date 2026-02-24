@@ -50,19 +50,19 @@ export const MerchantList: FC = () => {
         />
 
         <ProgressOverlay isLoading={isLoading}>
-          {merchants?.rows.length ? (
-            <MerchantGrid merchants={merchants?.rows} />
+          {merchants?.data?.length ? (
+            <MerchantGrid merchants={merchants?.data} />
           ) : (
             <Typography>
               <FormattedMessage id="pages.landing.merchants.empty" />
             </Typography>
           )}
 
-          {!!merchants?.count && (
+          {!!merchants?.total && (
             <StyledPagination
               shape="rounded"
               page={skip / take + 1}
-              count={Math.ceil(merchants.count / take)}
+              count={Math.ceil(merchants.total / take)}
               onChange={onChangePage}
             />
           )}

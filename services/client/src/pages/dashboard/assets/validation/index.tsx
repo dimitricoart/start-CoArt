@@ -24,13 +24,13 @@ export const AssetValidation: FC = () => {
       <PageHeader message="pages.asset.validate.title" />
 
       <ProgressOverlay isLoading={isLoading}>
-        {assets?.rows.length ? <AssetGrid assets={assets.rows} isDashBoard /> : <EmptyList />}
+        {assets?.data?.length ? <AssetGrid assets={assets.data} isDashBoard /> : <EmptyList />}
 
-        {!!assets?.count && assets?.count > defaultItemsPerPage && (
+        {!!assets?.total && assets?.total > defaultItemsPerPage && (
           <StyledPagination
             shape="rounded"
             page={skip / take + 1}
-            count={Math.ceil(assets.count / take)}
+            count={Math.ceil(assets.total / take)}
             onChange={onChangePage}
           />
         )}

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Link as RouterLink } from "react-router";
-import { CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
+import { Box, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 
 import type { IMerchant } from "@framework/types";
 import { Display } from "../../../components/lexical-display";
@@ -23,7 +23,15 @@ export const MerchantCard: FC<IMerchantCardProps> = props => {
           <Typography variant="ralewayMedium" color="custom.typography.black" component="h5" pr={2}>
             {merchant.title}
           </Typography>
-          <Display data={merchant?.subtitle} />
+          <Box
+            sx={{
+              fontSize: "0.875rem",
+              lineHeight: 1.4,
+              "& .MuiTypography-root": { fontSize: "inherit", fontWeight: 400 },
+            }}
+          >
+            <Display data={merchant?.subtitle} />
+          </Box>
         </CardContent>
       </CardActionArea>
     </StyledCardRoot>

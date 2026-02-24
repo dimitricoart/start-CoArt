@@ -22,13 +22,13 @@ export const LedgerTabComponent: FC<ILedgerTabComponentProps> = ({ showroomId })
 
   return (
     <ProgressOverlay isLoading={isLoading}>
-      <LedgerGrid ledgers={ledgers?.rows || []} />
+      <LedgerGrid ledgers={ledgers?.data || []} />
 
-      {!!ledgers?.count && (
+      {!!ledgers?.total && (
         <StyledPagination
           shape="rounded"
           page={skip / take + 1}
-          count={Math.ceil(ledgers.count / take)}
+          count={Math.ceil(ledgers.total / take)}
           onChange={onChangePage}
         />
       )}

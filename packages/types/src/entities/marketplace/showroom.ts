@@ -6,6 +6,7 @@ export interface IShowroom extends IUuidBase, IDateBase, ISearchable {
   subtitle: string;
   imageUrl: string;
   isDefault: boolean;
-  merchant?: IMerchant;
+  /** API list may return UUID string; single-item may return populated object */
+  merchant?: string | IMerchant;
   ledgers?: Array<ILedger>;
 }

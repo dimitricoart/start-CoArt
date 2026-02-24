@@ -25,12 +25,12 @@ export const MerchantList: FC = () => {
       <PageHeader sx={{ margin: 0, mb: 4 }} message="pages.dashboard.merchants.list.title" />
 
       <ProgressOverlay isLoading={isLoading}>
-        {merchants?.rows.length ? <MerchantGrid merchants={merchants.rows} isDashBoard /> : <EmptyList />}
-        {!!merchants?.count && merchants?.count > defaultItemsPerPage && (
+        {merchants?.data?.length ? <MerchantGrid merchants={merchants.data} isDashBoard /> : <EmptyList />}
+        {!!merchants?.total && merchants?.total > defaultItemsPerPage && (
           <StyledPagination
             shape="rounded"
             page={skip / take + 1}
-            count={Math.ceil(merchants.count / take)}
+            count={Math.ceil(merchants.total / take)}
             onChange={onChangePage}
           />
         )}

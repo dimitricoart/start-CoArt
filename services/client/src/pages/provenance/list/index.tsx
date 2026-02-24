@@ -51,13 +51,13 @@ export const ProvenanceList: FC = () => {
         />
 
         <ProgressOverlay isLoading={isLoading}>
-          {provenance?.rows.length ? <ProvenanceGrid provenance={provenance.rows} /> : null}
+          {provenance?.data?.length ? <ProvenanceGrid provenance={provenance.data} /> : null}
 
-          {!isMd && !!provenance?.count && provenance?.count > defaultItemsPerPage && (
+          {!isMd && !!provenance?.total && provenance?.total > defaultItemsPerPage && (
             <StyledPagination
               shape="rounded"
               page={skip / take + 1}
-              count={Math.ceil(provenance.count / take)}
+              count={Math.ceil(provenance.total / take)}
               onChange={onChangePage}
             />
           )}
