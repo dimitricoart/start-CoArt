@@ -9,7 +9,7 @@ import { ProgressOverlay } from "../../../components/page-layout";
 import { IShowroom } from "@framework/types";
 import { Display } from "../../../components/lexical-display";
 
-import { StyledMainRoot, StyledShowroomContent } from "./styled";
+import { StyledImage, StyledLogoImage, StyledMainRoot, StyledShowroomBlock, StyledShowroomContent } from "./styled";
 import { AboutTabContent, ButtonTabs, LedgerTabComponent } from "../../../components/tabs";
 import { BackButton } from "../../../components/buttons";
 import { sizeDecreaseCalc } from "../../../utils/sizeDecrease";
@@ -35,20 +35,40 @@ export const ShowroomView: FC = () => {
       <ProgressOverlay isLoading={isLoading}>
         {showroom ? (
           <Fragment>
-            <StyledShowroomContent>
-              <Typography variant="ralewayRegular" fontSize={sizeDecreaseCalc(58, 35)} lineHeight={"normal"}>
-                {showroom.title}
-              </Typography>
-              <Box
-                sx={{
-                  fontSize: "0.875rem",
-                  lineHeight: 1.4,
-                  "& .MuiTypography-root": { fontSize: "inherit", fontWeight: 400 },
-                }}
-              >
-                <Display data={showroom.subtitle} />
-              </Box>
-            </StyledShowroomContent>
+            <StyledShowroomBlock>
+              <StyledImage
+                component="img"
+                src={
+                  typeof showroom.merchant === "object" && showroom.merchant?.backgroundImageUrl
+                    ? showroom.merchant.backgroundImageUrl
+                    : showroom.imageUrl
+                }
+                alt={showroom.title}
+              />
+              <StyledShowroomContent>
+                <Typography variant="ralewayRegular" fontSize={sizeDecreaseCalc(58, 35)} lineHeight={"normal"}>
+                  {showroom.title}
+                </Typography>
+                <Box
+                  sx={{
+                    fontSize: sizeDecreaseCalc(16, 14),
+                    lineHeight: 1.5,
+                    "& .MuiTypography-root": { fontSize: "inherit", fontWeight: 400 },
+                  }}
+                >
+                  <Display data={showroom.subtitle} />
+                </Box>
+                <StyledLogoImage
+                  component="img"
+                  src={
+                    typeof showroom.merchant === "object" && showroom.merchant?.imageUrl
+                      ? showroom.merchant.imageUrl
+                      : showroom.imageUrl
+                  }
+                  alt={`${showroom.title}-logo`}
+                />
+              </StyledShowroomContent>
+            </StyledShowroomBlock>
 
             <Stack paddingInline={2} width="100%">
               <ButtonTabs

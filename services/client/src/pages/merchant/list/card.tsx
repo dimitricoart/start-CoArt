@@ -27,6 +27,7 @@ export const MerchantCard: FC<IMerchantCardProps> = props => {
             sx={{
               fontSize: "0.875rem",
               lineHeight: 1.4,
+              textAlign: "left",
               "& .MuiTypography-root": { fontSize: "inherit", fontWeight: 400 },
             }}
           >

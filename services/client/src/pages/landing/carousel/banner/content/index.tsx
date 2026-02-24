@@ -47,7 +47,7 @@ export const BannerContent: FC<IBannerContentProps> = ({ banner }) => {
           <VolumetricButton
             customColor="white"
             text={"pages.landing.hero.viewShowroom"}
-            to={ROUTES.SHOWROOM_VIEW.replace(":showroomId", "59530569-c971-41f0-895e-d150b4234352")}
+            to={`${ROUTES.MERCHANT_VIEW.replace(":merchantId", "59530569-c971-41f0-895e-d150b4234352")}?take=30&skip=0`}
             component={RouterLink}
           />
         </Grid>
