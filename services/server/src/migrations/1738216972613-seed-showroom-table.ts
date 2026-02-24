@@ -1,18 +1,8 @@
 import { Migration } from "@mikro-orm/migrations";
 
-import { simpleFormatting } from "../utils/lexical";
 import { ns } from "@framework/constants";
 
-import {
-  MERCHANT_ACTIVE_1,
-  MERCHANT_ACTIVE_2,
-  MERCHANT_INACTIVE,
-  MERCHANT_PENDING,
-  SHOWROOM_1,
-  SHOWROOM_2,
-  SHOWROOM_3,
-  SHOWROOM_4,
-} from "../utils/uuid";
+const EMPTY_LEXICAL = '{"root":{"children":[],"direction":null,"format":"","indent":0,"type":"root","version":1}}';
 
 export class SeedShowroomTable1738216972613 extends Migration {
   // eslint-disable-next-line @typescript-eslint/require-await
@@ -27,37 +17,37 @@ export class SeedShowroomTable1738216972613 extends Migration {
         background_image_url,
         merchant_id
       ) values (
-        '${SHOWROOM_1}',
+        '00000000-0000-7000-8000-300000000001',
         'Trej" Showroom',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         1,
         'https://storage.googleapis.com/coart-artworks/watch.jpg',
         'https://www.saatchiart.com/saatchi-general/homepage/hybrid-2021/hp-hero-slide1-01272025-large.jpg',
-        '${MERCHANT_ACTIVE_1}'
+        '00000000-0000-7000-8000-100000000001'
       ), (
-        '${SHOWROOM_2}',
+        '00000000-0000-7000-8000-300000000002',
         'Meow Dao"s Showroom',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         3,
         'https://storage.googleapis.com/coart-artworks/lith.jpg',
         'https://www.saatchiart.com/saatchi-general/homepage/2020/hero/hybrid-hero-slide3-large.jpg',
-        '${MERCHANT_ACTIVE_2}'
+        '00000000-0000-7000-8000-100000000002'
       ), (
-        '${SHOWROOM_3}',
+        '00000000-0000-7000-8000-300000000003',
         'CTO"s Showroom',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         0,
         'https://www.saatchiart.com/saatchi-general/homepage/2020/hero/hybrid-hero-slide3-large.jpg',
         'https://www.saatchiart.com/saatchi-general/homepage/2020/hero/hybrid-hero-slide3-large.jpg',
-        '${MERCHANT_INACTIVE}'
+        '00000000-0000-7000-8000-100000000003'
       ), (
-        '${SHOWROOM_4}',
-        'EthBerry"s Showroom',
-        '${simpleFormatting}',
+        '00000000-0000-7000-8000-300000000004',
+        'Fourth Showroom',
+        '${EMPTY_LEXICAL}',
         0,
         'https://www.saatchiart.com/saatchi-general/homepage/hybrid-2021/HP-slide-2-new-2022-large.jpg',
         'https://www.saatchiart.com/saatchi-general/homepage/hybrid-2021/HP-slide-2-new-2022-large.jpg',
-        '${MERCHANT_PENDING}'
+        '00000000-0000-7000-8000-100000000004'
       );
     `);
   }

@@ -24,7 +24,7 @@ export class CreateContractTable1563804000110 extends Migration {
         decimals int not null,
         base_token_uri varchar not null,
         contract_status ${ns}.contract_status_enum not null,
-        created_at timestamptz not null default current_timestamp,
+        created_at timestamptz  not null default current_timestamp,
         updated_at timestamptz not null default current_timestamp
       );
     `);

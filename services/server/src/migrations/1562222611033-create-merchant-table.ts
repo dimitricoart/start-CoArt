@@ -22,7 +22,7 @@ export class CreateMerchantTable1562222611033 extends Migration {
         email varchar not null unique,
         api_key uuid not null default uuid_generate_v4(),
         merchant_status ${ns}.merchant_status_enum not null default 'PENDING',
-        created_at timestamptz not null default current_timestamp,
+        created_at timestamptz  not null default current_timestamp,
         updated_at timestamptz not null default current_timestamp
       );
     `);

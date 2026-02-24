@@ -2,20 +2,6 @@ import { Migration } from "@mikro-orm/migrations";
 
 import { imageUrl, ns } from "@framework/constants";
 
-import {
-  ASSET_DECLINED_1,
-  ASSET_DECLINED_2,
-  ASSET_FINALIZED_1,
-  ASSET_FINALIZED_2,
-  ASSET_FINALIZED_3,
-  ASSET_FINALIZED_4,
-  ASSET_FINALIZED_5,
-  ASSET_FINALIZED_6,
-  ASSET_NEW_1,
-  ASSET_NEW_2,
-  ASSET_NEW_3,
-} from "../utils/uuid";
-
 export class SeedDocumentTable1738237445775 extends Migration {
   // eslint-disable-next-line @typescript-eslint/require-await
   public async up(): Promise<void> {
@@ -29,67 +15,67 @@ export class SeedDocumentTable1738237445775 extends Migration {
         'Caption',
         '${imageUrl}',
         0,
-        '${ASSET_FINALIZED_1}'
+        '00000000-0000-7000-8000-400000000001'
       ), (
         'Caption',
         '${imageUrl}',
         1,
-        '${ASSET_FINALIZED_1}'
+        '00000000-0000-7000-8000-400000000001'
       ), (
         'Caption',
         '${imageUrl}',
         2,
-        '${ASSET_FINALIZED_1}'
+        '00000000-0000-7000-8000-400000000001'
       ), (
         'Caption',
         '${imageUrl}',
         0,
-        '${ASSET_FINALIZED_2}'
+        '00000000-0000-7000-8000-400000000002'
       ), (
         'Caption',
         '${imageUrl}',
         0,
-        '${ASSET_FINALIZED_3}'
+        '00000000-0000-7000-8000-400000000003'
       ), (
         'Caption',
         '${imageUrl}',
         0,
-        '${ASSET_FINALIZED_4}'
+        '00000000-0000-7000-8000-400000000004'
       ), (
         'Caption',
         '${imageUrl}',
         0,
-        '${ASSET_FINALIZED_5}'
+        '00000000-0000-7000-8000-400000000005'
       ), (
         'Caption',
         '${imageUrl}',
         0,
-        '${ASSET_FINALIZED_6}'
+        '00000000-0000-7000-8000-400000000006'
       ), (
         'Caption',
         '${imageUrl}',
         0,
-        '${ASSET_DECLINED_1}'
+        '00000000-0000-7000-8000-400000000007'
       ), (
         'Caption',
         '${imageUrl}',
         0,
-        '${ASSET_DECLINED_2}'
+        '00000000-0000-7000-8000-400000000008'
       ), (
         'Caption',
         '${imageUrl}',
         0,
-        '${ASSET_NEW_1}'
+        '00000000-0000-7000-8000-400000000009'
       ), (
         'Caption',
         '${imageUrl}',
         0,
-        '${ASSET_NEW_2}'
+        '00000000-0000-7000-8000-40000000000a'
       ), (
         'Caption',
         '${imageUrl}',
         0,
-        '${ASSET_NEW_3}'
+        '00000000-0000-7000-8000-40000000000b'
       );
     `);
   }

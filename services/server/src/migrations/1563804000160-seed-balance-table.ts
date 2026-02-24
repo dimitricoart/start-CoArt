@@ -1,6 +1,8 @@
 import { Migration } from "@mikro-orm/migrations";
 
-import { ns, seedWalletAddress } from "@framework/constants";
+import { ns } from "@framework/constants";
+
+const SEED_WALLET = "0x0000000000000000000000000000000000000001";
 
 export class SeedBalanceTable1563804000160 extends Migration {
   // eslint-disable-next-line @typescript-eslint/require-await
@@ -11,7 +13,7 @@ export class SeedBalanceTable1563804000160 extends Migration {
         amount,
         token_id
       ) values (
-        '${seedWalletAddress}',
+        '${SEED_WALLET}',
         10,
         1
       );

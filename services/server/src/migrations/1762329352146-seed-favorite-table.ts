@@ -2,8 +2,6 @@ import { Migration } from "@mikro-orm/migrations";
 
 import { ns } from "@framework/constants";
 
-import { ASSET_FINALIZED_1, ASSET_FINALIZED_2, USER_ACTIVE_1, USER_ACTIVE_2 } from "../utils/uuid";
-
 export class SeedFavoriteTable1762329352146 extends Migration {
   // eslint-disable-next-line @typescript-eslint/require-await
   public async up(): Promise<void> {
@@ -12,14 +10,14 @@ export class SeedFavoriteTable1762329352146 extends Migration {
         user_id,
         artwork_id
       ) values (
-        '${USER_ACTIVE_1}',
-        '${ASSET_FINALIZED_1}'
+        '00000000-0000-7000-8000-200000000001',
+        '00000000-0000-7000-8000-400000000001'
       ), (
-        '${USER_ACTIVE_2}',
-        '${ASSET_FINALIZED_2}'
+        '00000000-0000-7000-8000-200000000001',
+        '00000000-0000-7000-8000-400000000002'
       ), (
-        '${USER_ACTIVE_2}',
-        '${ASSET_FINALIZED_1}'
+        '00000000-0000-7000-8000-200000000002',
+        '00000000-0000-7000-8000-400000000001'
       );
     `);
   }

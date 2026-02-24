@@ -14,14 +14,6 @@ export class RenameArtworkToAsset1765704614366 extends Migration {
     `);
 
     this.addSql(`
-      ALTER TABLE ${ns}.artwork
-          RENAME CONSTRAINT artwork_showroom_id_fkey
-              TO asset_showroom_id_fkey;
-
-      ALTER TABLE ${ns}.artwork
-          RENAME CONSTRAINT artwork_token_id_fkey
-              TO asset_token_id_fkey;
-
       ALTER TABLE ${ns}.artwork RENAME TO asset;
     `);
 
@@ -74,10 +66,6 @@ export class RenameArtworkToAsset1765704614366 extends Migration {
     `);
 
     this.addSql(`
-      ALTER TABLE ${ns}.stripe_checkout
-          RENAME CONSTRAINT stripe_checkout_artwork_id_fkey
-              TO stripe_checkout_asset_id_fkey;
-
       ALTER TABLE ${ns}.stripe_checkout RENAME COLUMN artwork_id TO asset_id;
     `);
 
@@ -97,14 +85,6 @@ export class RenameArtworkToAsset1765704614366 extends Migration {
     `);
 
     this.addSql(`
-        ALTER TABLE ${ns}.asset
-            RENAME CONSTRAINT asset_showroom_id_fkey
-                TO artwork_showroom_id_fkey;
-
-        ALTER TABLE ${ns}.asset
-            RENAME CONSTRAINT asset_token_id_fkey
-                TO artwork_token_id_fkey;
-
       ALTER TABLE ${ns}.asset RENAME TO artwork;
     `);
 

@@ -19,7 +19,7 @@ export class CreateTokenTable1563804000130 extends Migration {
         contract_id int not null,
         token_status ${ns}.token_status_enum not null,
         token_id uint256 not null,
-        created_at timestamptz not null default current_timestamp,
+        created_at timestamptz  not null default current_timestamp,
         updated_at timestamptz not null default current_timestamp,
         foreign key (contract_id) references ${ns}.contract (id) on delete cascade
       );

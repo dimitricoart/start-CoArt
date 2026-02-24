@@ -1,7 +1,8 @@
 import { Migration } from "@mikro-orm/migrations";
 
-import { simpleFormatting } from "../utils/lexical";
 import { imageUrl, ns } from "@framework/constants";
+
+const EMPTY_LEXICAL = '{"root":{"children":[],"direction":null,"format":"","indent":0,"type":"root","version":1}}';
 
 export class SeedContractTable1563804000120 extends Migration {
   // eslint-disable-next-line @typescript-eslint/require-await
@@ -21,7 +22,7 @@ export class SeedContractTable1563804000120 extends Migration {
       ) values (
         1,
         'CoArt',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         '${imageUrl}',
         '0xb3B8ffAc899b912A44363260D424a4C6CA7B42A2', -- staging
         137,

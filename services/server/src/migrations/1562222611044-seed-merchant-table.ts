@@ -1,9 +1,8 @@
 import { Migration } from "@mikro-orm/migrations";
 
-import { simpleFormatting } from "../utils/lexical";
 import { imageUrl, ns } from "@framework/constants";
 
-import { MERCHANT_ACTIVE_1, MERCHANT_ACTIVE_2, MERCHANT_INACTIVE, MERCHANT_PENDING } from "../utils/uuid";
+const EMPTY_LEXICAL = '{"root":{"children":[],"direction":null,"format":"","indent":0,"type":"root","version":1}}';
 
 export class SeedMerchantTable1562222611044 extends Migration {
   // eslint-disable-next-line @typescript-eslint/require-await
@@ -17,32 +16,32 @@ export class SeedMerchantTable1562222611044 extends Migration {
         email,
         merchant_status
       ) values (
-        '${MERCHANT_ACTIVE_1}',
+        '00000000-0000-7000-8000-100000000001',
         'Trej"s Shop',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         '${imageUrl}',
         'trejgun@gmail.com',
         'ACTIVE'
       ), (
-        '${MERCHANT_ACTIVE_2}',
+        '00000000-0000-7000-8000-100000000002',
         'Meow"s Shop',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         '${imageUrl}',
         'meow.dao@gmail.com',
         'ACTIVE'
       ), (
-        '${MERCHANT_INACTIVE}',
+        '00000000-0000-7000-8000-100000000003',
         'CTO"s Shop',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         '${imageUrl}',
         'cto@fractown.com',
         'INACTIVE'
       ), (
-        '${MERCHANT_PENDING}',
-        'EthBerry"s Shop',
-        '${simpleFormatting}',
+        '00000000-0000-7000-8000-100000000004',
+        'Demo Shop',
+        '${EMPTY_LEXICAL}',
         '${imageUrl}',
-        'oleg@ethberry.io',
+        'owner@example.com',
         'PENDING'
       );
     `);

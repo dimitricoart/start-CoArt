@@ -11,7 +11,7 @@ export class CreateBalanceTable1563804000150 extends Migration {
         account varchar not null,
         amount uint256 not null,
         token_id int not null,
-        created_at timestamptz not null default current_timestamp,
+        created_at timestamptz  not null default current_timestamp,
         updated_at timestamptz not null default current_timestamp,
         foreign key (token_id) references ${ns}.token (id) on delete cascade
       );

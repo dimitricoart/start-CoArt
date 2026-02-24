@@ -40,7 +40,7 @@ export class CreateUserTable1562222612033 extends Migration {
         user_roles ${ns}.user_role_enum[] not null default '{CUSTOMER}',
         user_status ${ns}.user_status_enum not null default 'PENDING',
         merchant_id uuid not null,
-        created_at timestamptz not null default current_timestamp,
+        created_at timestamptz  not null default current_timestamp,
         updated_at timestamptz not null default current_timestamp,
         foreign key (merchant_id) references ${ns}.merchant (id) on delete cascade
       );

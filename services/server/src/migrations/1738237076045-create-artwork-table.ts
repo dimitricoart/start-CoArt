@@ -165,7 +165,6 @@ export class CreateArtworkTable1738237076045 extends Migration {
     this.addSql(`drop table ${ns}.artwork`);
     this.addSql(`drop type ${ns}.artwork_orientation_enum;`);
     this.addSql(`drop type ${ns}.artwork_type_enum;`);
-    this.addSql(`drop type ${ns}.artwork_status_enum;`);
     this.addSql(`drop type ${ns}.artwork_category_enum;`);
     this.addSql(`drop type ${ns}.artwork_subject_enum;`);
     this.addSql(`drop type ${ns}.artwork_style_enum;`);

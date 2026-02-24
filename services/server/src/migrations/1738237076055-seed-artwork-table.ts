@@ -1,24 +1,8 @@
 import { Migration } from "@mikro-orm/migrations";
 
-import { simpleFormatting } from "../utils/lexical";
 import { ns } from "@framework/constants";
 
-import {
-  ASSET_DECLINED_1,
-  ASSET_DECLINED_2,
-  ASSET_FINALIZED_1,
-  ASSET_FINALIZED_2,
-  ASSET_FINALIZED_3,
-  ASSET_FINALIZED_4,
-  ASSET_FINALIZED_5,
-  ASSET_FINALIZED_6,
-  ASSET_NEW_1,
-  ASSET_NEW_2,
-  ASSET_NEW_3,
-  SHOWROOM_1,
-  SHOWROOM_2,
-  SHOWROOM_3,
-} from "../utils/uuid";
+const EMPTY_LEXICAL = '{"root":{"children":[],"direction":null,"format":"","indent":0,"type":"root","version":1}}';
 
 export class SeedArtworkTable1738237076055 extends Migration {
   // eslint-disable-next-line @typescript-eslint/require-await
@@ -47,9 +31,9 @@ export class SeedArtworkTable1738237076055 extends Migration {
         showroom_id,
         token_id
       ) values (
-        '${ASSET_FINALIZED_1}',
+        '00000000-0000-7000-8000-400000000001',
         'My First Artwork',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         'https://www.saatchiart.com/saatchi-general/homepage/hybrid-2021/hp-hero-slide1-01272025-large.jpg',
         10000,
         false,
@@ -66,12 +50,12 @@ export class SeedArtworkTable1738237076055 extends Migration {
         10,
         10,
         'CM',
-        '${SHOWROOM_1}',
+        '00000000-0000-7000-8000-300000000001',
         1
       ), (
-        '${ASSET_FINALIZED_2}',
+        '00000000-0000-7000-8000-400000000002',
         'My Second Artwork',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         'https://www.saatchiart.com/saatchi-general/homepage/hybrid-2021/hp-hero-slide1-01272025-large.jpg',
         10000,
         false,
@@ -88,12 +72,12 @@ export class SeedArtworkTable1738237076055 extends Migration {
         10,
         10,
         'CM',
-        '${SHOWROOM_1}',
+        '00000000-0000-7000-8000-300000000001',
         null
       ), (
-        '${ASSET_FINALIZED_3}',
+        '00000000-0000-7000-8000-400000000003',
         'My Third Artwork',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         'https://www.saatchiart.com/saatchi-general/homepage/hybrid-2021/hp-hero-slide1-01272025-large.jpg',
         10000,
         false,
@@ -110,12 +94,12 @@ export class SeedArtworkTable1738237076055 extends Migration {
         10,
         10,
         'INCH',
-        '${SHOWROOM_1}',
+        '00000000-0000-7000-8000-300000000001',
         null
       ), (
-        '${ASSET_FINALIZED_4}',
+        '00000000-0000-7000-8000-400000000004',
         'My Fourth Artwork',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         'https://www.saatchiart.com/saatchi-general/homepage/hybrid-2021/hp-hero-slide1-01272025-large.jpg',
         10000,
         false,
@@ -132,12 +116,12 @@ export class SeedArtworkTable1738237076055 extends Migration {
         10,
         10,
         'INCH',
-        '${SHOWROOM_1}',
+        '00000000-0000-7000-8000-300000000001',
         null
       ), (
-        '${ASSET_FINALIZED_5}',
+        '00000000-0000-7000-8000-400000000005',
         'My Fifth Artwork',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         'https://www.saatchiart.com/saatchi-general/homepage/hybrid-2021/hp-hero-slide1-01272025-large.jpg',
         10000,
         false,
@@ -154,12 +138,12 @@ export class SeedArtworkTable1738237076055 extends Migration {
         null,
         null,
         null,
-        '${SHOWROOM_1}',
+        '00000000-0000-7000-8000-300000000001',
         null
       ), (
-        '${ASSET_FINALIZED_6}',
+        '00000000-0000-7000-8000-400000000006',
         'My Sixth Artwork',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         'https://www.saatchiart.com/saatchi-general/homepage/hybrid-2021/hp-hero-slide1-01272025-large.jpg',
         10000,
         false,
@@ -176,12 +160,12 @@ export class SeedArtworkTable1738237076055 extends Migration {
         null,
         null,
         null,
-        '${SHOWROOM_1}',
+        '00000000-0000-7000-8000-300000000001',
         null
       ), (
-        '${ASSET_DECLINED_1}',
+        '00000000-0000-7000-8000-400000000007',
         'Artwork #A',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         'https://www.saatchiart.com/saatchi-general/homepage/hybrid-2021/hp-hero-slide1-01272025-large.jpg',
         10000,
         false,
@@ -198,12 +182,12 @@ export class SeedArtworkTable1738237076055 extends Migration {
         null,
         null,
         null,
-        '${SHOWROOM_2}',
+        '00000000-0000-7000-8000-300000000002',
         null
       ), (
-        '${ASSET_DECLINED_2}',
+        '00000000-0000-7000-8000-400000000008',
         'Artwork #B',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         'https://www.saatchiart.com/saatchi-general/homepage/hybrid-2021/hp-hero-slide1-01272025-large.jpg',
         10000,
         false,
@@ -220,12 +204,12 @@ export class SeedArtworkTable1738237076055 extends Migration {
         null,
         null,
         null,
-        '${SHOWROOM_2}',
+        '00000000-0000-7000-8000-300000000002',
         null
       ), (
-        '${ASSET_NEW_1}',
+        '00000000-0000-7000-8000-400000000009',
         'Artwork #C',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         'https://www.saatchiart.com/saatchi-general/homepage/hybrid-2021/hp-hero-slide1-01272025-large.jpg',
         10000,
         false,
@@ -242,12 +226,12 @@ export class SeedArtworkTable1738237076055 extends Migration {
         null,
         null,
         null,
-        '${SHOWROOM_2}',
+        '00000000-0000-7000-8000-300000000002',
         null
       ), (
-        '${ASSET_NEW_2}',
+        '00000000-0000-7000-8000-40000000000a',
         'Artwork #D',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         'https://www.saatchiart.com/saatchi-general/homepage/hybrid-2021/hp-hero-slide1-01272025-large.jpg',
         10000,
         false,
@@ -264,12 +248,12 @@ export class SeedArtworkTable1738237076055 extends Migration {
         null,
         null,
         null,
-        '${SHOWROOM_3}',
+        '00000000-0000-7000-8000-300000000003',
         null
       ), (
-        '${ASSET_NEW_3}',
+        '00000000-0000-7000-8000-40000000000b',
         'Artwork #E',
-        '${simpleFormatting}',
+        '${EMPTY_LEXICAL}',
         'https://www.saatchiart.com/saatchi-general/homepage/hybrid-2021/hp-hero-slide1-01272025-large.jpg',
         10000,
         false,
@@ -286,7 +270,7 @@ export class SeedArtworkTable1738237076055 extends Migration {
         null,
         null,
         null,
-        '${SHOWROOM_3}',
+        '00000000-0000-7000-8000-300000000003',
         null
       );
     `);
