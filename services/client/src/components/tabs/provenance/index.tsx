@@ -28,14 +28,18 @@ export const ProvenanceTabContent = (props: IProvenanceProps) => {
   const isMd = useMediaQuery(theme => theme.breakpoints.down("md"));
 
   const { data: provenance, isLoading } = useQuery({
-    queryKey: ["provenance"],
+    queryKey: ["provenance", merchantId, assetId],
     queryFn: (): Promise<IPaginationResult<IProvenance>> => {
+      const params: Record<string, string> = { merchantId };
+      if (assetId && assetId.trim() !== "") {
+        params.assetId = assetId;
+      }
       return api.fetchJson({
         url: `/provenance`,
-        data: { merchantId, assetId },
+        data: params,
       });
     },
-    enabled: true,
+    enabled: !!merchantId,
   });
 
   if (!provenance?.data?.length) {

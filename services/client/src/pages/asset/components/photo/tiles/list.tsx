@@ -1,5 +1,6 @@
-import { FC } from "react";
-import { IconButton, Theme, useMediaQuery, useTheme } from "@mui/material";
+import { FC, useCallback, useState } from "react";
+import { Dialog, IconButton, Theme, useMediaQuery, useTheme } from "@mui/material";
+import { Close as CloseIcon } from "@mui/icons-material";
 import Carousel from "react-multi-carousel";
 
 import type { IPhoto } from "@framework/types";
@@ -14,8 +15,11 @@ interface IAssetListProps {
 
 export const PhotosList: FC<IAssetListProps> = props => {
   const { photos } = props;
+  const [lightboxUrl, setLightboxUrl] = useState<string | null>(null);
 
   const theme = useTheme();
+  const openLightbox = useCallback((url: string) => setLightboxUrl(url), []);
+  const closeLightbox = useCallback(() => setLightboxUrl(null), []);
 
   const responsive = {
     [Resolutions.DESKTOP]: {
@@ -73,9 +77,42 @@ export const PhotosList: FC<IAssetListProps> = props => {
         }
       >
         {photos.map((photo, i) => (
-          <PhotoCard key={i} photo={photo} />
+          <PhotoCard key={i} photo={photo} onPreview={openLightbox} />
         ))}
       </Carousel>
+      <Dialog
+        open={!!lightboxUrl}
+        onClose={closeLightbox}
+        maxWidth={false}
+        PaperProps={{
+          sx: {
+            maxWidth: "95vw",
+            maxHeight: "95vh",
+            overflow: "hidden",
+            bgcolor: "transparent",
+            boxShadow: "none",
+          },
+        }}
+        slotProps={{ backdrop: { sx: { bgcolor: "rgba(0,0,0,0.85)" } } }}
+      >
+        {lightboxUrl ? (
+          <>
+            <IconButton
+              aria-label="close"
+              onClick={closeLightbox}
+              sx={{ position: "absolute", right: 8, top: 8, color: "white", zIndex: 1 }}
+            >
+              <CloseIcon />
+            </IconButton>
+            <img
+              src={lightboxUrl}
+              alt=""
+              style={{ maxWidth: "95vw", maxHeight: "95vh", objectFit: "contain" }}
+              onClick={closeLightbox}
+            />
+          </>
+        ) : null}
+      </Dialog>
     </StyledPhotosListRoot>
   );
 };
