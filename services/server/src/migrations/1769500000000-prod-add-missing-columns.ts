@@ -4,10 +4,11 @@ import { ns } from "@framework/constants";
 
 /**
  * Adds columns that exist in code but may be missing in production DB
- * (when older migrations were not run). Only ADD + backfill; never drops data.
+ * (when older migrations were not run). Only ADD + backfill where safe; never drops data.
  *
- * - merchant: priority, background_image_url (backfill from showroom)
- * - asset: merchant_id (backfill from showroom via showroom_id)
+ * - merchant: priority (default 0), background_image_url (default '') — no backfill from showroom
+ *   (showroom may not have those columns in prod).
+ * - asset: merchant_id (backfill from showroom via showroom_id).
  *
  * Safe: idempotent (IF NOT EXISTS), preserves all existing data and types.
  */
@@ -23,29 +24,12 @@ export class ProdAddMissingColumns1769500000000 extends Migration {
       ALTER TABLE ${ns}.merchant
       ADD COLUMN IF NOT EXISTS background_image_url varchar;
     `);
-
     this.addSql(`
-      UPDATE ${ns}.merchant m
-      SET
-        priority = COALESCE(s.s_priority, 0),
-        background_image_url = COALESCE(m.background_image_url, s.s_background_image_url)
-      FROM (
-        SELECT DISTINCT ON (merchant_id)
-          merchant_id,
-          priority AS s_priority,
-          background_image_url AS s_background_image_url
-        FROM ${ns}.showroom
-        ORDER BY merchant_id, is_default DESC, id
-      ) s
-      WHERE s.merchant_id = m.id;
+      UPDATE ${ns}.merchant SET background_image_url = '' WHERE background_image_url IS NULL;
     `);
-
     this.addSql(`
       ALTER TABLE ${ns}.merchant
       ALTER COLUMN background_image_url SET DEFAULT '';
-    `);
-    this.addSql(`
-      UPDATE ${ns}.merchant SET background_image_url = '' WHERE background_image_url IS NULL;
     `);
     this.addSql(`
       ALTER TABLE ${ns}.merchant
