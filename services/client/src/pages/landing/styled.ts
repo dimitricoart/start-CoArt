@@ -38,4 +38,8 @@ export const StyledCardsBlockRoot = styled("section")(({ theme }) => ({
       fontSize: sizeDecreaseCalc(58, 27, "px"),
     },
   },
+
+  "& .MuiCardContent-root .MuiTypography-root": {
+    textAlign: "left",
+  },
 }));

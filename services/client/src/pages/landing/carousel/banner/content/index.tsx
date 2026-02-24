@@ -39,7 +39,7 @@ export const BannerContent: FC<IBannerContentProps> = ({ banner }) => {
         <Grid size={{ md: 12, lg: 6, xl: 6 }}>
           <VolumetricButton
             text={"pages.landing.hero.viewAsset"}
-            to={ROUTES.LEDGER_VIEW.replace(":ledgerId", "72d5f03c-a2c9-44db-8770-b75af4dec8d6")}
+            to={ROUTES.LEDGER_VIEW.replace(":ledgerId", "bf06afc1-f0b2-4f65-bc90-6fc8e2224b39")}
             component={RouterLink}
           />
         </Grid>
