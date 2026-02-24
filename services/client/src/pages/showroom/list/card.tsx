@@ -27,10 +27,7 @@ export const ShowroomCard: FC<IShowroomCardProps> = props => {
             sx={{
               fontSize: "0.875rem",
               lineHeight: 1.4,
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
+              "& .MuiTypography-root": { fontSize: "inherit", fontWeight: 400 },
             }}
           >
             <Display data={showroom?.subtitle} />
