@@ -22,13 +22,13 @@ export const ShowroomTabComponent: FC<IShowroomTabComponentProps> = ({ merchantI
 
   return (
     <ProgressOverlay isLoading={isLoading}>
-      <ShowroomGrid showrooms={showrooms?.rows || []} />
+      <ShowroomGrid showrooms={showrooms?.data || []} />
 
-      {!!showrooms?.count && (
+      {!!showrooms?.total && (
         <StyledPagination
           shape="rounded"
           page={skip / take + 1}
-          count={Math.ceil(showrooms.count / take)}
+          count={Math.ceil(showrooms.total / take)}
           onChange={onChangePage}
         />
       )}

@@ -4,7 +4,7 @@ import { Link as RouterLink } from "react-router";
 
 import { PageHeader, ProgressOverlay } from "../../../../components/page-layout";
 import { useFetchQuery } from "@framework/mui-form";
-import { type IShowroom, type IShowroomSearchDto, UserRole } from "@framework/types";
+import { type IShowroom, type IShowroomSearchDto, type IUser, UserRole } from "@framework/types";
 import { defaultItemsPerPage } from "@framework/constants";
 import { useUser } from "../../../../libs/providers/user-provider";
 
@@ -45,12 +45,12 @@ export const ShowroomList: FC = () => {
       </PageHeader>
 
       <ProgressOverlay isLoading={isLoading}>
-        {showrooms?.rows.length ? <MerchantGrid showrooms={showrooms.rows} isDashBoard /> : <EmptyList />}
-        {!!showrooms?.count && showrooms?.count > defaultItemsPerPage && (
+        {showrooms?.data?.length ? <MerchantGrid showrooms={showrooms.data} isDashBoard /> : <EmptyList />}
+        {!!showrooms?.total && showrooms?.total > defaultItemsPerPage && (
           <StyledPagination
             shape="rounded"
             page={skip / take + 1}
-            count={Math.ceil(showrooms.count / take)}
+            count={Math.ceil(showrooms.total / take)}
             onChange={onChangePage}
           />
         )}

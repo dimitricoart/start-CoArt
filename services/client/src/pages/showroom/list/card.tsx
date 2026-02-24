@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Link as RouterLink } from "react-router";
-import { CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
+import { Box, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 
 import type { IShowroom } from "@framework/types";
 import { Display } from "../../../components/lexical-display";
@@ -23,7 +23,18 @@ export const ShowroomCard: FC<IShowroomCardProps> = props => {
           <Typography variant="ralewayMedium" color="custom.typography.black" component="h5" pr={2}>
             {showroom.title}
           </Typography>
-          <Display data={showroom?.subtitle} />
+          <Box
+            sx={{
+              fontSize: "0.875rem",
+              lineHeight: 1.4,
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+            }}
+          >
+            <Display data={showroom?.subtitle} />
+          </Box>
         </CardContent>
       </CardActionArea>
     </StyledCardRoot>
